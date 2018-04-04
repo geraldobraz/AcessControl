@@ -3,7 +3,7 @@ import time
 import paho.mqtt.client as mqtt
 from pycpfcnpj import cpfcnpj
 import os
-
+from tkinter import messagebox
 
 creds = 'tempfile.temp'  # This just sets the variable creds to 'tempfile.temp'
 
@@ -109,12 +109,11 @@ def DelUser():
     Signup()  # And goes back to the start!
 
 
-# Main
 # TODO
 '''
 Essa eh a parte do main vamos criar uma tela em branco cheia de botoes!
 Cada botao deve levar a uma nova tela:
-- Add Novos alunos -- Fazendo! 
+- Add Novos alunos -- OK! 
 - Mudar Senha
 - Procurar Aluno
 - Apagar aluno
@@ -124,47 +123,43 @@ Cada botao deve levar a uma nova tela:
 - https://www.python-course.eu/tkinter_entry_widgets.php
 - http://effbot.org/tkinterbook/entry.htm
 '''
-# todo: Fazer pegar as funcoes q eu fiz em linha de comando
+# TODO: Fazer pegar as funcoes q eu fiz em linha de comando
 
-def EnviarDados():
+# Adicao de Alunos
+def SalvarDados():
     print("Enviando os dados...")
     print(e1.get())
     print(e2.get())
     print(e3.get())
 
-
     nome = e1.get()
     cpf = e2.get()
     senha = e3.get()
-    if(cpfcnpj.validate(cpf)):
-        print("Cpf validado")
-        # time.sleep(0.5)
-
-        if True: #         FIXME: Validar o cpf no BD
-            print("Cpf nao existe no BD")
-            if len(senha)== 4:
-                print("Senha com tamanho certo")
-                msg = str(nome) + "%" + str(cpf) + "%" + "Sexo" + "%" + str(
-                senha)  # Message sended in Mqtt protocol
-                # client.publish("software/Add_Aluno",msg)
-                print(msg)
-            else:
-                print("Tamanho da Senha errado")
-        else:
-            print("Cpf ja existe no BD")
+    if cpfcnpj.validate(cpf) and True and len(senha)==4: # FIXME: Lembrar de validar o cpf no BD
+        print("Senha com tamanho certo")
+        msg = str(nome) + "%" + str(cpf) + "%" + "Sexo" + "%" + str(
+            senha)  # Message sended in Mqtt protocol
+        # client.publish("software/Add_Aluno",msg)
+        print(msg)
+        e1.delete(0, END)
+        e2.delete(0, END)
+        e3.delete(0, END)
+        messagebox.showinfo("Informação", "Aluno adicionado com sucesso!")
     else:
         e1.delete(0, END)
-        # TODO: Deletar os dados dos campos
+        e2.delete(0, END)
+        e3.delete(0, END)
+        messagebox.showwarning("Erro", "Dados Inválidos")
 
-        print("Cpf nao é valido")
-# TODO: Mostrar uma msg para o usuario falando que ocorreu um erro!
+        print("Dados inválidos")
+
 def AddAluno():
     TelaAddAlunos = Tk()
     TelaAddAlunos.title('Adicionar Alunos')
     TelaAddAlunos.geometry('400x200')
-    Label(TelaAddAlunos,text="Nome:").grid(row=0)
-    Label(TelaAddAlunos,text="CPF:").grid(row=1)
-    Label(TelaAddAlunos,text="Senha:").grid(row=2)
+    Label(TelaAddAlunos,text="Nome:").grid(row=0,sticky=E)
+    Label(TelaAddAlunos,text="CPF(Só números):").grid(row=1,sticky=E)
+    Label(TelaAddAlunos,text="Senha:").grid(row=2,sticky=E)
     #Nome
     global e1
     e1 = Entry(TelaAddAlunos)
@@ -173,15 +168,45 @@ def AddAluno():
     e2 = Entry(TelaAddAlunos)
     # Senha
     global  e3
-    e3 = Entry(TelaAddAlunos)
+    e3 = Entry(TelaAddAlunos,show="*")
     e1.grid(row=0,column=1)
     e2.grid(row=1,column=1)
     e3.grid(row=2,column=1)
-    Button(TelaAddAlunos, text='Adicionar', command=EnviarDados).grid(row=3, column=1, sticky=W, pady=4)
+    Button(TelaAddAlunos, text='Adicionar', command=SalvarDados).grid(row=3, column=1, sticky=W, pady=4)
     mainloop()
 
+# Mudança da Senha
+def AlterarSenha():
+    print("Alterando a senha")
+def MudancaSenha():
+    print("Mudança de Senha")
+    TelaMudancaSenha = Tk()
+    '''
+    O usuario escreve o cpf dele a senha nova duas vezes e depois confirma! Os dados vao ser enviados para uma func 
+    que envia para o bd alterar
+    '''
+    TelaMudancaSenha.title('Adicionar Alunos')
+    TelaMudancaSenha.geometry('400x200')
+    Label(TelaMudancaSenha, text="CPF(Só números):").grid(row=0,sticky=E)
+    Label(TelaMudancaSenha, text="Nova Senha:").grid(row=1,sticky=E)
+    Label(TelaMudancaSenha, text="Digite novamente a Senha:").grid(row=2,sticky=E)
+    # CPF
+    global e4
+    e4 = Entry(TelaMudancaSenha)
+    # Senha_1
+    global e5
+    e5 = Entry(TelaMudancaSenha, show="*")
+    # Senha_2
+    global e6
+    e6 = Entry(TelaMudancaSenha, show="*")
+    e4.grid(row=0, column=1)
+    e5.grid(row=1, column=1)
+    e6.grid(row=2, column=1)
+    # TODO: Terminar essa parte
+    Button(TelaMudancaSenha, text='Mudar Senha', command=AlterarSenha).grid(row=3, column=1, sticky=W, pady=4)
+    mainloop()
 
-# effbot.org/tkinterbook/grid.htm
+# Tela Inicial
 TelaPrincipal = Tk()
 TelaPrincipal.title('Tela Principal')
 TelaPrincipal.geometry('500x300')
@@ -189,9 +214,8 @@ telaPrincipalLabel = Label(TelaPrincipal, height=2, text="Selecione o que deseja
 # telaPrincipalLabel.grid(row= 0, column = 0 )
 telaPrincipalLabel.grid(row=0, column=0, sticky=E)
 
-# Tela Inicial
 AddAlunosbutton = Button(TelaPrincipal,height=1,font = "Arial 20 normal",text=   "Adicionar Alunos        ",command = AddAluno)
-MudarSenahbutton = Button(TelaPrincipal,height=1,font = "Arial 20 normal", text= "Mudar Senha             ",command = AddAluno)
+MudarSenahbutton = Button(TelaPrincipal,height=1,font = "Arial 20 normal", text= "Mudar Senha             ",command = MudancaSenha)
 ProcurarAlunobutton = Button(TelaPrincipal,height=1,font ="Arial 20 normal",text="Procurar Aluno           ",command = AddAluno)
 ApagarAlunobutton = Button(TelaPrincipal,height=1, font = "Arial 20 normal",text="Apagar Aluno             ",command = AddAluno)
 ListarTodosbutton = Button(TelaPrincipal,height=1,font = "Arial 20 normal", text="Listar todos os Alunos",command = AddAluno)
