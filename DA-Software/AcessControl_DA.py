@@ -114,7 +114,7 @@ def DelUser():
 Essa eh a parte do main vamos criar uma tela em branco cheia de botoes!
 Cada botao deve levar a uma nova tela:
 - Add Novos alunos -- OK! 
-- Mudar Senha
+- Mudar Senha -- OK!
 - Procurar Aluno
 - Apagar aluno
 - Listar todos os alunos
@@ -137,8 +137,7 @@ def SalvarDados():
     senha = e3.get()
     if cpfcnpj.validate(cpf) and True and len(senha)==4: # FIXME: Lembrar de validar o cpf no BD
         print("Senha com tamanho certo")
-        msg = str(nome) + "%" + str(cpf) + "%" + "Sexo" + "%" + str(
-            senha)  # Message sended in Mqtt protocol
+        msg = str(nome) + "%" + str(cpf) + "%" + "Sexo" + "%" + str(senha)  # Message sended in Mqtt protocol
         # client.publish("software/Add_Aluno",msg)
         print(msg)
         e1.delete(0, END)
@@ -178,6 +177,29 @@ def AddAluno():
 # Mudança da Senha
 def AlterarSenha():
     print("Alterando a senha")
+    print(e4.get())
+    print(e5.get())
+    print(e6.get())
+
+    cpf = e4.get()
+    senha_1 = e5.get()
+    senha_2 = e6.get()
+
+    if senha_1 == senha_2 and cpfcnpj.validate(cpf) and True and len(senha_1)==4: # FIXME: Lembrar de validar o cpf no BD:
+        print("Válido")
+        #TODO: Enviar os dados
+        msg = str(cpf) + "%" + str(senha_1)
+        print(msg)
+        e4.delete(0, END)
+        e5.delete(0, END)
+        e6.delete(0, END)
+        messagebox.showinfo("Informação", "Senha Alterada com sucesso!")
+    else:
+        e4.delete(0, END)
+        e5.delete(0, END)
+        e6.delete(0, END)
+        messagebox.showwarning("Erro", "Dados Inválidos")
+        print("Dado Inválido")
 def MudancaSenha():
     print("Mudança de Senha")
     TelaMudancaSenha = Tk()
@@ -202,7 +224,6 @@ def MudancaSenha():
     e4.grid(row=0, column=1)
     e5.grid(row=1, column=1)
     e6.grid(row=2, column=1)
-    # TODO: Terminar essa parte
     Button(TelaMudancaSenha, text='Mudar Senha', command=AlterarSenha).grid(row=3, column=1, sticky=W, pady=4)
     mainloop()
 
