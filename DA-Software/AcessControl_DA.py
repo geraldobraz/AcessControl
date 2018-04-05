@@ -5,6 +5,7 @@ from pycpfcnpj import cpfcnpj
 import os
 from tkinter import messagebox
 
+
 creds = 'tempfile.temp'  # This just sets the variable creds to 'tempfile.temp'
 
 
@@ -122,6 +123,7 @@ Cada botao deve levar a uma nova tela:
 -Links
 - https://www.python-course.eu/tkinter_entry_widgets.php
 - http://effbot.org/tkinterbook/entry.htm
+- https://www.youtube.com/watch?v=JcFZl75WPUA
 '''
 # TODO: Fazer pegar as funcoes q eu fiz em linha de comando
 
@@ -131,7 +133,6 @@ def SalvarDados():
     print(e1.get())
     print(e2.get())
     print(e3.get())
-
     nome = e1.get()
     cpf = e2.get()
     senha = e3.get()
@@ -151,7 +152,6 @@ def SalvarDados():
         messagebox.showwarning("Erro", "Dados Inválidos")
 
         print("Dados inválidos")
-
 def AddAluno():
     TelaAddAlunos = Tk()
     TelaAddAlunos.title('Adicionar Alunos')
@@ -173,7 +173,6 @@ def AddAluno():
     e3.grid(row=2,column=1)
     Button(TelaAddAlunos, text='Adicionar', command=SalvarDados).grid(row=3, column=1, sticky=W, pady=4)
     mainloop()
-
 # Mudança da Senha
 def AlterarSenha():
     print("Alterando a senha")
@@ -207,7 +206,7 @@ def MudancaSenha():
     O usuario escreve o cpf dele a senha nova duas vezes e depois confirma! Os dados vao ser enviados para uma func 
     que envia para o bd alterar
     '''
-    TelaMudancaSenha.title('Adicionar Alunos')
+    TelaMudancaSenha.title("Adicionar Alunos")
     TelaMudancaSenha.geometry('400x200')
     Label(TelaMudancaSenha, text="CPF(Só números):").grid(row=0,sticky=E)
     Label(TelaMudancaSenha, text="Nova Senha:").grid(row=1,sticky=E)
@@ -226,6 +225,30 @@ def MudancaSenha():
     e6.grid(row=2, column=1)
     Button(TelaMudancaSenha, text='Mudar Senha', command=AlterarSenha).grid(row=3, column=1, sticky=W, pady=4)
     mainloop()
+# Procura de Aluno
+def Procurar():
+    print("Procurando...")
+
+    if cpfcnpj.validate(e7.get()) and True: #FIXME: Fazer a leitura do Banco de Dados
+        # Mandar uma msg mqtt com o cpf e escutar a resposta
+        print(e7.get())
+        e7.delete(0, END)
+    #     No onmessage ele deve criar outra tela com as informacoes do estudante
+    else:
+        print("Dados Inválidos")
+        e7.delete(0, END)
+def ProcuraAluno():
+    print("Procurando Aluno")
+    TelaProcuraAluno = Tk()
+    TelaProcuraAluno.title("Procura de Alunos")
+    TelaProcuraAluno.geometry('500x250')
+    Label(TelaProcuraAluno,text="Digite o CPF do aluno desejado:").grid(row=0,sticky=E)
+    # CPF
+    global e7
+    e7 = Entry(TelaProcuraAluno)
+    e7.grid(row=0, column=1)
+    Button(TelaProcuraAluno,text="Procurar",command=Procurar).grid(row=3, column=1, sticky=W, pady=2)
+    mainloop()
 
 # Tela Inicial
 TelaPrincipal = Tk()
@@ -237,7 +260,7 @@ telaPrincipalLabel.grid(row=0, column=0, sticky=E)
 
 AddAlunosbutton = Button(TelaPrincipal,height=1,font = "Arial 20 normal",text=   "Adicionar Alunos        ",command = AddAluno)
 MudarSenahbutton = Button(TelaPrincipal,height=1,font = "Arial 20 normal", text= "Mudar Senha             ",command = MudancaSenha)
-ProcurarAlunobutton = Button(TelaPrincipal,height=1,font ="Arial 20 normal",text="Procurar Aluno           ",command = AddAluno)
+ProcurarAlunobutton = Button(TelaPrincipal,height=1,font ="Arial 20 normal",text="Procurar Aluno           ",command = ProcuraAluno)
 ApagarAlunobutton = Button(TelaPrincipal,height=1, font = "Arial 20 normal",text="Apagar Aluno             ",command = AddAluno)
 ListarTodosbutton = Button(TelaPrincipal,height=1,font = "Arial 20 normal", text="Listar todos os Alunos",command = AddAluno)
 
