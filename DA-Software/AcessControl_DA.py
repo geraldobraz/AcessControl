@@ -233,9 +233,11 @@ def Procurar():
         # Mandar uma msg mqtt com o cpf e escutar a resposta
         print(e7.get())
         e7.delete(0, END)
+
     #     No onmessage ele deve criar outra tela com as informacoes do estudante
     else:
         print("Dados Inválidos")
+        messagebox.showwarning("Erro", "Dados Inválidos")
         e7.delete(0, END)
 def ProcuraAluno():
     print("Procurando Aluno")
@@ -249,6 +251,33 @@ def ProcuraAluno():
     e7.grid(row=0, column=1)
     Button(TelaProcuraAluno,text="Procurar",command=Procurar).grid(row=3, column=1, sticky=W, pady=2)
     mainloop()
+# Apagar Alunos
+def Apagar():
+    print("Apagando...")
+    if cpfcnpj.validate(e8.get()) and True: #FIXME: Fazer a leitura do Banco de Dados
+        # Mandar uma msg mqtt com o cpf e escutar a resposta
+        print(e8.get())
+        if messagebox.askyesno("Alerta","Deseja realmente apagar esse aluno?"):
+            messagebox.showinfo("Informação", "Aluno apagado com sucesso!")
+            e8.delete(0, END)
+        else:
+            pass
+    else:
+        print("Dados Inválidos")
+        messagebox.showwarning("Erro", "Dados Inválidos")
+        e8.delete(0, END)
+def ApagarAluno():
+    print("Apagar Aluno")
+    TelaApagarAluno = Tk()
+    TelaApagarAluno.title("Apagar Alunos")
+    TelaApagarAluno.geometry('400x250')
+    Label(TelaApagarAluno, text="Digite o CPF do aluno desejado:").grid(row=0, sticky=E)
+    # CPF
+    global e8
+    e8 = Entry(TelaApagarAluno)
+    e8.grid(row=0, column=1)
+    Button(TelaApagarAluno, text="Apagar", command=Apagar).grid(row=3, column=1, sticky=W, pady=2)
+    mainloop()
 
 # Tela Inicial
 TelaPrincipal = Tk()
@@ -261,7 +290,7 @@ telaPrincipalLabel.grid(row=0, column=0, sticky=E)
 AddAlunosbutton = Button(TelaPrincipal,height=1,font = "Arial 20 normal",text=   "Adicionar Alunos        ",command = AddAluno)
 MudarSenahbutton = Button(TelaPrincipal,height=1,font = "Arial 20 normal", text= "Mudar Senha             ",command = MudancaSenha)
 ProcurarAlunobutton = Button(TelaPrincipal,height=1,font ="Arial 20 normal",text="Procurar Aluno           ",command = ProcuraAluno)
-ApagarAlunobutton = Button(TelaPrincipal,height=1, font = "Arial 20 normal",text="Apagar Aluno             ",command = AddAluno)
+ApagarAlunobutton = Button(TelaPrincipal,height=1, font = "Arial 20 normal",text="Apagar Aluno             ",command = ApagarAluno)
 ListarTodosbutton = Button(TelaPrincipal,height=1,font = "Arial 20 normal", text="Listar todos os Alunos",command = AddAluno)
 
 
