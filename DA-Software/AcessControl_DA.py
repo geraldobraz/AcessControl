@@ -62,15 +62,17 @@ def on_message(client, userdata, message):
             messagebox.showwarning("Erro", "Esse CPF já foi cadastrado")
     #  Trocar Senha
     if message.topic == "software/Trocar/validacao/Serv2Sw":
+        print("Entrou 1")
         if message.payload.decode("utf-8") == "Valido":
-            e4.delete(0, END)
-            e5.delete(0, END)
-            e6.delete(0, END)
+            print("Entrou 2")
+            # e4.delete(0, END)
+            # e5.delete(0, END)
+            # e6.delete(0, END)
             messagebox.showinfo("Informação", "Senha Alterada com sucesso!")
         if message.payload.decode("utf-8") == "Nao Valido":
-            e4.delete(0, END)
-            e5.delete(0, END)
-            e6.delete(0, END)
+            # e4.delete(0, END)
+            # e5.delete(0, END)
+            # e6.delete(0, END)
             messagebox.showwarning("Erro", "Dados Inválidos")
     # Procurar Aluno
     if message.topic == "software/Procura/validacao/Serv2Sw":
@@ -115,6 +117,10 @@ def SalvarDados2():
         # client.publish("software/Add_Aluno",msg)
         client.publish("software/Add/validacao/Sw2Serv",msg)
         client.loop_start()
+        time.sleep(0.5)
+        e1.delete(0, END)
+        e2.delete(0, END)
+        e3.delete(0, END)
         print(msg)
     else:
         e1.delete(0, END)
@@ -192,9 +198,11 @@ def AlterarSenha():
         msg = str(cpf) + "%" + str(senha_1)
         print(msg)
         client.publish("software/Trocar/validacao/Sw2Serv",msg)
-        # e4.delete(0, END)
-        # e5.delete(0, END)
-        # e6.delete(0, END)
+        client.loop_start()
+        time.sleep(0.5)
+        e4.delete(0, END)
+        e5.delete(0, END)
+        e6.delete(0, END)
         # messagebox.showinfo("Informação", "Senha Alterada com sucesso!")
     else:
         e4.delete(0, END)
@@ -322,6 +330,7 @@ client.on_message = on_message
 client.connect("192.168.1.3", 5050) # todo: Testar com o servidor!
 client.subscribe("software/Add/validacao/Sw2Serv")
 client.subscribe("software/Add/validacao/Serv2Sw")
+client.subscribe("software/Trocar/validacao/Serv2Sw")
 
 
 telaPrincipalLabel.mainloop()
