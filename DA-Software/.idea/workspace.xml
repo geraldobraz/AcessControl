@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7bfb2b1e-5361-4ec0-b23e-61b269fca1a5" name="Default" comment="">
+    <list default="true" id="7bfb2b1e-5361-4ec0-b23e-61b269fca1a5" name="Default" comment="- Biblioteca do MQTT foi adicionada&#10;- Foi apagado do codigo partes que não seriam usadas&#10;-">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AcessControl_DA.py" afterPath="$PROJECT_DIR$/AcessControl_DA.py" />
     </list>
@@ -17,24 +17,25 @@
       <file leaf-file-name="AcessControl_DA.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AcessControl_DA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="201" column="0" lean-forward="false" selection-start-line="201" selection-start-column="0" selection-end-line="201" selection-end-column="0" />
+            <state relative-caret-position="-56">
+              <caret line="289" column="14" lean-forward="true" selection-start-line="289" selection-start-column="14" selection-end-line="289" selection-end-column="14" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#273#1958#0" expanded="false" />
-                <element signature="e#1981#2533#0" expanded="false" />
-                <element signature="e#2553#3607#0" expanded="false" />
-                <element signature="e#3632#4534#0" expanded="false" />
-                <element signature="e#4556#4685#0" expanded="false" />
-                <element signature="e#5175#5975#0" expanded="false" />
-                <element signature="e#5996#6664#0" expanded="false" />
-                <element signature="e#6708#7430#0" expanded="false" />
-                <element signature="e#7455#8399#0" expanded="false" />
-                <element signature="e#8439#8868#0" expanded="false" />
-                <element signature="e#8557#8659#0" expanded="false" />
-                <element signature="e#8893#9326#0" expanded="false" />
-                <element signature="e#9361#9896#0" expanded="false" />
-                <element signature="e#9920#10339#0" expanded="false" />
+                <element signature="e#1153#1834#0" expanded="false" />
+                <element signature="e#1919#2350#0" expanded="false" />
+                <element signature="e#2437#2736#0" expanded="false" />
+                <element signature="e#2817#3051#0" expanded="false" />
+                <element signature="e#3145#3443#0" expanded="false" />
+                <element signature="e#3567#4351#0" expanded="false" />
+                <element signature="e#4375#5175#0" expanded="false" />
+                <element signature="e#5197#6158#0" expanded="false" />
+                <element signature="e#6202#6987#0" expanded="false" />
+                <element signature="e#6478#6810#0" expanded="false" />
+                <element signature="e#7012#7956#0" expanded="false" />
+                <element signature="e#7996#8569#0" expanded="false" />
+                <element signature="e#8594#9027#0" expanded="false" />
+                <element signature="e#9062#9690#0" expanded="false" />
+                <element signature="e#9714#10133#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -52,9 +53,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1920" />
-    <option name="height" value="1200" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="620" />
+    <option name="y" value="22" />
+    <option name="width" value="1300" />
+    <option name="height" value="1178" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -72,8 +75,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -85,6 +86,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -151,23 +154,30 @@
       <option name="project" value="LOCAL" />
       <updated>1522969330601</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="-Parte de Apagar Aluno Finalizada! (Falta validar a existencia do cpf no BD e enviar comandos MQTT)&#10;-Mensagem de Alerta quando se insere dados inváldos em procurar Alunos">
+      <created>1522970304970</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1522970304970</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1200" extended-state="0" />
+    <frame x="620" y="22" width="1300" height="1178" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16134185" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1934339" sideWeight="0.5021299" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20129271" sideWeight="0.4978701" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18012422" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1934339" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -204,11 +214,12 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Parte de Mudar Senha finalizado! (Falta validar a existencia do cpf no BD)" />
     <MESSAGE value="Parte de Procurar Aluno Finalizada! (Falta validar a existencia do cpf no BD e enviar comandos MQTT)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Parte de Procurar Aluno Finalizada! (Falta validar a existencia do cpf no BD e enviar comandos MQTT)" />
+    <MESSAGE value="-Parte de Apagar Aluno Finalizada! (Falta validar a existencia do cpf no BD e enviar comandos MQTT)&#10;-Mensagem de Alerta quando se insere dados inváldos em procurar Alunos" />
+    <option name="LAST_COMMIT_MESSAGE" value="-Parte de Apagar Aluno Finalizada! (Falta validar a existencia do cpf no BD e enviar comandos MQTT)&#10;-Mensagem de Alerta quando se insere dados inváldos em procurar Alunos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="7" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -219,20 +230,71 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#273#1958#0" expanded="false" />
-            <element signature="e#1981#2533#0" expanded="false" />
-            <element signature="e#2553#3607#0" expanded="false" />
-            <element signature="e#3632#4534#0" expanded="false" />
-            <element signature="e#4556#4685#0" expanded="false" />
-            <element signature="e#5175#5975#0" expanded="false" />
-            <element signature="e#5996#6664#0" expanded="false" />
-            <element signature="e#6708#7430#0" expanded="false" />
-            <element signature="e#7455#8399#0" expanded="false" />
-            <element signature="e#8439#8868#0" expanded="false" />
-            <element signature="e#8557#8659#0" expanded="false" />
-            <element signature="e#8893#9326#0" expanded="false" />
-            <element signature="e#9361#9896#0" expanded="false" />
-            <element signature="e#9920#10339#0" expanded="false" />
+            <element signature="e#1153#1834#0" expanded="false" />
+            <element signature="e#1919#2350#0" expanded="false" />
+            <element signature="e#2437#2736#0" expanded="false" />
+            <element signature="e#2817#3051#0" expanded="false" />
+            <element signature="e#3145#3443#0" expanded="false" />
+            <element signature="e#3567#4351#0" expanded="false" />
+            <element signature="e#4375#5175#0" expanded="false" />
+            <element signature="e#5197#6158#0" expanded="false" />
+            <element signature="e#6202#6987#0" expanded="false" />
+            <element signature="e#6478#6810#0" expanded="false" />
+            <element signature="e#7012#7956#0" expanded="false" />
+            <element signature="e#7996#8569#0" expanded="false" />
+            <element signature="e#8594#9027#0" expanded="false" />
+            <element signature="e#9062#9690#0" expanded="false" />
+            <element signature="e#9714#10133#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AcessControl_DA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#1153#1834#0" expanded="false" />
+            <element signature="e#1919#2350#0" expanded="false" />
+            <element signature="e#2437#2736#0" expanded="false" />
+            <element signature="e#2817#3051#0" expanded="false" />
+            <element signature="e#3145#3443#0" expanded="false" />
+            <element signature="e#3567#4351#0" expanded="false" />
+            <element signature="e#4375#5175#0" expanded="false" />
+            <element signature="e#5197#6158#0" expanded="false" />
+            <element signature="e#6202#6987#0" expanded="false" />
+            <element signature="e#6478#6810#0" expanded="false" />
+            <element signature="e#7012#7956#0" expanded="false" />
+            <element signature="e#7996#8569#0" expanded="false" />
+            <element signature="e#8594#9027#0" expanded="false" />
+            <element signature="e#9062#9690#0" expanded="false" />
+            <element signature="e#9714#10133#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AcessControl_DA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#1153#1834#0" expanded="false" />
+            <element signature="e#1919#2350#0" expanded="false" />
+            <element signature="e#2437#2736#0" expanded="false" />
+            <element signature="e#2817#3051#0" expanded="false" />
+            <element signature="e#3145#3443#0" expanded="false" />
+            <element signature="e#3567#4351#0" expanded="false" />
+            <element signature="e#4375#5175#0" expanded="false" />
+            <element signature="e#5197#6158#0" expanded="false" />
+            <element signature="e#6202#6987#0" expanded="false" />
+            <element signature="e#6478#6810#0" expanded="false" />
+            <element signature="e#7012#7956#0" expanded="false" />
+            <element signature="e#7996#8569#0" expanded="false" />
+            <element signature="e#8594#9027#0" expanded="false" />
+            <element signature="e#9062#9690#0" expanded="false" />
+            <element signature="e#9714#10133#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -241,38 +303,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="394">
           <caret line="516" column="0" lean-forward="false" selection-start-line="516" selection-start-column="0" selection-end-line="516" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/tkinter/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="2503" column="8" lean-forward="false" selection-start-line="2503" selection-start-column="8" selection-end-line="2503" selection-end-column="8" />
+        <state relative-caret-position="3132">
+          <caret line="498" column="8" lean-forward="false" selection-start-line="498" selection-start-column="8" selection-end-line="498" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AcessControl_DA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="201" column="0" lean-forward="false" selection-start-line="201" selection-start-column="0" selection-end-line="201" selection-end-column="0" />
+        <state relative-caret-position="-56">
+          <caret line="289" column="14" lean-forward="true" selection-start-line="289" selection-start-column="14" selection-end-line="289" selection-end-column="14" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#273#1958#0" expanded="false" />
-            <element signature="e#1981#2533#0" expanded="false" />
-            <element signature="e#2553#3607#0" expanded="false" />
-            <element signature="e#3632#4534#0" expanded="false" />
-            <element signature="e#4556#4685#0" expanded="false" />
-            <element signature="e#5175#5975#0" expanded="false" />
-            <element signature="e#5996#6664#0" expanded="false" />
-            <element signature="e#6708#7430#0" expanded="false" />
-            <element signature="e#7455#8399#0" expanded="false" />
-            <element signature="e#8439#8868#0" expanded="false" />
-            <element signature="e#8557#8659#0" expanded="false" />
-            <element signature="e#8893#9326#0" expanded="false" />
-            <element signature="e#9361#9896#0" expanded="false" />
-            <element signature="e#9920#10339#0" expanded="false" />
+            <element signature="e#1153#1834#0" expanded="false" />
+            <element signature="e#1919#2350#0" expanded="false" />
+            <element signature="e#2437#2736#0" expanded="false" />
+            <element signature="e#2817#3051#0" expanded="false" />
+            <element signature="e#3145#3443#0" expanded="false" />
+            <element signature="e#3567#4351#0" expanded="false" />
+            <element signature="e#4375#5175#0" expanded="false" />
+            <element signature="e#5197#6158#0" expanded="false" />
+            <element signature="e#6202#6987#0" expanded="false" />
+            <element signature="e#6478#6810#0" expanded="false" />
+            <element signature="e#7012#7956#0" expanded="false" />
+            <element signature="e#7996#8569#0" expanded="false" />
+            <element signature="e#8594#9027#0" expanded="false" />
+            <element signature="e#9062#9690#0" expanded="false" />
+            <element signature="e#9714#10133#0" expanded="false" />
           </folding>
         </state>
       </provider>
