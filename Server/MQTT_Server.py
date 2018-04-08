@@ -31,8 +31,6 @@ def ProcuraSenha(ValorCpf, ValorSenha):
     cursor = cnx.cursor()
     cpf_atual = int(ValorCpf)
     cursor.execute(query, {'cpf_atual': cpf_atual})
-    # print (cursor)
-    # data = cursor.fetchall()
 
     for row in cursor:
         print(row)
@@ -129,11 +127,6 @@ def on_message(client, userdata, message):
         else:
             print("CPF existe no Banco")
             client.publish("software/Add/validacao/Serv2Sw", "Nao Valido")
-    # Add no BD
-    #     data_Alunos = ("10120230345", "4321")
-
-
-
 
     if message.topic == "software/cpf/validacao/Env":
         print(">>Topic: software/cpf/validacao/Env")
@@ -147,17 +140,6 @@ def on_message(client, userdata, message):
             client.publish("software/cpf/validacao/Recv", "Nao Existe")
             print("Cpf nao existe no BD")
 
-    if message.topic == "software/Add_Aluno":
-        print(">>Topic: software/Add_Aluno")
-        aluno = str(message.payload.decode("utf-8")).split("%")
-        '''
-        aluno[0] = Nome do Aluno
-        aluno[1] = Cpf do Aluno
-        aluno[2] = Sexo do Aluno
-        aluno[0] = Senha do Aluno
-
-        '''
-        print(aluno[0])
 
     '''
     if message.topic == "celular/cpf":
@@ -183,11 +165,7 @@ def on_message(client, userdata, message):
     '''
 
 
-    # if message.topic == "software/cpf/Add_cpf":
-    #     print("Cpf Add")
-    # if message.topic == "software/senha/Add_senha":
-    #     print("Senha Add")
-    # if message.topic == "software/senha/Change_senha":
+
 
 
 # Criando um cliente novo
@@ -214,14 +192,6 @@ client.subscribe("software/Add/validacao/Serv2Sw")
 # client.subscribe("software/Mudar_Senha")
 # client.subscribe("software/cpf/validacao/Env")
 # client.subscribe("software/cpf/validacao/Recv")
-
-
-
-############## SOFTWARE DO D.A. ###########
-# # FIXME Olhar isso!
-# client.subscribe("software/cpf/Add_cpf")
-# client.subscribe("software/senha/Add_senha")
-# client.subscribe("software/cpf/Change_senha")
 
 client.loop_forever()
 
