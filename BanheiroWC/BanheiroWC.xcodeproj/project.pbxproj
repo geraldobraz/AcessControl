@@ -1,0 +1,464 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C160032C20222E7E00B68F74 /* EntrarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C160032B20222E7E00B68F74 /* EntrarViewController.swift */; };
+		C16003302022442300B68F74 /* AcionamentoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C160032F2022442300B68F74 /* AcionamentoViewController.swift */; };
+		C160033220224A6500B68F74 /* AjudaLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C160033120224A6500B68F74 /* AjudaLoginViewController.swift */; };
+		C19D1358207D74A700045BBF /* logoWC_2.png in Resources */ = {isa = PBXBuildFile; fileRef = C19D1353207D74A700045BBF /* logoWC_2.png */; };
+		C19D1359207D74A700045BBF /* logoWC_1.png in Resources */ = {isa = PBXBuildFile; fileRef = C19D1354207D74A700045BBF /* logoWC_1.png */; };
+		C19D135A207D74A700045BBF /* logoWC_4.png in Resources */ = {isa = PBXBuildFile; fileRef = C19D1355207D74A700045BBF /* logoWC_4.png */; };
+		C19D135B207D74A700045BBF /* logoWC_33.png in Resources */ = {isa = PBXBuildFile; fileRef = C19D1356207D74A700045BBF /* logoWC_33.png */; };
+		C19D135C207D74A700045BBF /* logoWC_3.png in Resources */ = {isa = PBXBuildFile; fileRef = C19D1357207D74A700045BBF /* logoWC_3.png */; };
+		C1C6515A2029180A00322B6D /* AjudaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C651592029180A00322B6D /* AjudaViewController.swift */; };
+		C1C7121E2028E0290021EC64 /* Logo_Eca_Alta_Resolucao.png in Resources */ = {isa = PBXBuildFile; fileRef = C1C7121D2028E0290021EC64 /* Logo_Eca_Alta_Resolucao.png */; };
+		C1C712202028E0F50021EC64 /* DEE.png in Resources */ = {isa = PBXBuildFile; fileRef = C1C7121F2028E0F40021EC64 /* DEE.png */; };
+		C1D1F9EE204AEB8A00FB8939 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1D1F9ED204AEB8A00FB8939 /* Main.storyboard */; };
+		C1D4C8352022256B007770C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D4C8342022256B007770C0 /* AppDelegate.swift */; };
+		C1D4C8372022256B007770C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D4C8362022256B007770C0 /* ViewController.swift */; };
+		C1D4C83C2022256B007770C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1D4C83B2022256B007770C0 /* Assets.xcassets */; };
+		C1D4C83F2022256B007770C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1D4C83D2022256B007770C0 /* LaunchScreen.storyboard */; };
+		D8BCD892D8D4C4184F77E7CB /* Pods_BanheiroWC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607D7AC7C7395B712C04BBD7 /* Pods_BanheiroWC.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		033FD8E930E74A77678ECE99 /* Pods-BanheiroWC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BanheiroWC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BanheiroWC/Pods-BanheiroWC.debug.xcconfig"; sourceTree = "<group>"; };
+		607D7AC7C7395B712C04BBD7 /* Pods_BanheiroWC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BanheiroWC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C160032B20222E7E00B68F74 /* EntrarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrarViewController.swift; sourceTree = "<group>"; };
+		C160032F2022442300B68F74 /* AcionamentoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcionamentoViewController.swift; sourceTree = "<group>"; };
+		C160033120224A6500B68F74 /* AjudaLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjudaLoginViewController.swift; sourceTree = "<group>"; };
+		C19D1353207D74A700045BBF /* logoWC_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoWC_2.png; sourceTree = "<group>"; };
+		C19D1354207D74A700045BBF /* logoWC_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoWC_1.png; sourceTree = "<group>"; };
+		C19D1355207D74A700045BBF /* logoWC_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoWC_4.png; sourceTree = "<group>"; };
+		C19D1356207D74A700045BBF /* logoWC_33.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoWC_33.png; sourceTree = "<group>"; };
+		C19D1357207D74A700045BBF /* logoWC_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoWC_3.png; sourceTree = "<group>"; };
+		C1C651592029180A00322B6D /* AjudaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjudaViewController.swift; sourceTree = "<group>"; };
+		C1C7121D2028E0290021EC64 /* Logo_Eca_Alta_Resolucao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_Eca_Alta_Resolucao.png; sourceTree = "<group>"; };
+		C1C7121F2028E0F40021EC64 /* DEE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DEE.png; sourceTree = "<group>"; };
+		C1D1F9ED204AEB8A00FB8939 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C1D4C8312022256B007770C0 /* BanheiroWC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BanheiroWC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1D4C8342022256B007770C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C1D4C8362022256B007770C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C1D4C83B2022256B007770C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C1D4C83E2022256B007770C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C1D4C8402022256B007770C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4756E7E28CDA7D3C1D46F9B /* Pods-BanheiroWC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BanheiroWC.release.xcconfig"; path = "Pods/Target Support Files/Pods-BanheiroWC/Pods-BanheiroWC.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C1D4C82E2022256B007770C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8BCD892D8D4C4184F77E7CB /* Pods_BanheiroWC.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3BC7DF0E0F32C499A6C15C1F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				033FD8E930E74A77678ECE99 /* Pods-BanheiroWC.debug.xcconfig */,
+				C4756E7E28CDA7D3C1D46F9B /* Pods-BanheiroWC.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		88FC07BAFC35AB19A2DE1E84 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				607D7AC7C7395B712C04BBD7 /* Pods_BanheiroWC.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C160031A202226CE00B68F74 /* Imagens */ = {
+			isa = PBXGroup;
+			children = (
+				C19D1354207D74A700045BBF /* logoWC_1.png */,
+				C19D1353207D74A700045BBF /* logoWC_2.png */,
+				C19D1357207D74A700045BBF /* logoWC_3.png */,
+				C19D1355207D74A700045BBF /* logoWC_4.png */,
+				C19D1356207D74A700045BBF /* logoWC_33.png */,
+				C1C7121F2028E0F40021EC64 /* DEE.png */,
+				C1C7121D2028E0290021EC64 /* Logo_Eca_Alta_Resolucao.png */,
+			);
+			path = Imagens;
+			sourceTree = "<group>";
+		};
+		C1D4C8282022256B007770C0 = {
+			isa = PBXGroup;
+			children = (
+				C160031A202226CE00B68F74 /* Imagens */,
+				C1D4C8332022256B007770C0 /* BanheiroWC */,
+				C1D4C8322022256B007770C0 /* Products */,
+				3BC7DF0E0F32C499A6C15C1F /* Pods */,
+				88FC07BAFC35AB19A2DE1E84 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		C1D4C8322022256B007770C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C1D4C8312022256B007770C0 /* BanheiroWC.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C1D4C8332022256B007770C0 /* BanheiroWC */ = {
+			isa = PBXGroup;
+			children = (
+				C1D1F9ED204AEB8A00FB8939 /* Main.storyboard */,
+				C1D4C8342022256B007770C0 /* AppDelegate.swift */,
+				C1D4C8362022256B007770C0 /* ViewController.swift */,
+				C160032B20222E7E00B68F74 /* EntrarViewController.swift */,
+				C160032F2022442300B68F74 /* AcionamentoViewController.swift */,
+				C160033120224A6500B68F74 /* AjudaLoginViewController.swift */,
+				C1C651592029180A00322B6D /* AjudaViewController.swift */,
+				C1D4C83D2022256B007770C0 /* LaunchScreen.storyboard */,
+				C1D4C8402022256B007770C0 /* Info.plist */,
+				C1D4C83B2022256B007770C0 /* Assets.xcassets */,
+			);
+			path = BanheiroWC;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C1D4C8302022256B007770C0 /* BanheiroWC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C1D4C8432022256B007770C0 /* Build configuration list for PBXNativeTarget "BanheiroWC" */;
+			buildPhases = (
+				6B5C65816899FC19543C048E /* [CP] Check Pods Manifest.lock */,
+				C1D4C82D2022256B007770C0 /* Sources */,
+				C1D4C82E2022256B007770C0 /* Frameworks */,
+				C1D4C82F2022256B007770C0 /* Resources */,
+				B31E7F45FED10CAF7CBFBA93 /* [CP] Embed Pods Frameworks */,
+				A6FEF590499283B059325880 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BanheiroWC;
+			productName = BanheiroWC;
+			productReference = C1D4C8312022256B007770C0 /* BanheiroWC.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C1D4C8292022256B007770C0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Geraldo Neto";
+				TargetAttributes = {
+					C1D4C8302022256B007770C0 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = C1D4C82C2022256B007770C0 /* Build configuration list for PBXProject "BanheiroWC" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C1D4C8282022256B007770C0;
+			productRefGroup = C1D4C8322022256B007770C0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C1D4C8302022256B007770C0 /* BanheiroWC */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C1D4C82F2022256B007770C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C19D135C207D74A700045BBF /* logoWC_3.png in Resources */,
+				C19D135B207D74A700045BBF /* logoWC_33.png in Resources */,
+				C1D1F9EE204AEB8A00FB8939 /* Main.storyboard in Resources */,
+				C19D1359207D74A700045BBF /* logoWC_1.png in Resources */,
+				C19D1358207D74A700045BBF /* logoWC_2.png in Resources */,
+				C1C712202028E0F50021EC64 /* DEE.png in Resources */,
+				C1D4C83F2022256B007770C0 /* LaunchScreen.storyboard in Resources */,
+				C19D135A207D74A700045BBF /* logoWC_4.png in Resources */,
+				C1D4C83C2022256B007770C0 /* Assets.xcassets in Resources */,
+				C1C7121E2028E0290021EC64 /* Logo_Eca_Alta_Resolucao.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6B5C65816899FC19543C048E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BanheiroWC-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A6FEF590499283B059325880 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BanheiroWC/Pods-BanheiroWC-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B31E7F45FED10CAF7CBFBA93 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BanheiroWC/Pods-BanheiroWC-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaMQTT/CocoaMQTT.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyTimer/SwiftyTimer.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaMQTT.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyTimer.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BanheiroWC/Pods-BanheiroWC-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C1D4C82D2022256B007770C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1D4C8372022256B007770C0 /* ViewController.swift in Sources */,
+				C160033220224A6500B68F74 /* AjudaLoginViewController.swift in Sources */,
+				C16003302022442300B68F74 /* AcionamentoViewController.swift in Sources */,
+				C1D4C8352022256B007770C0 /* AppDelegate.swift in Sources */,
+				C1C6515A2029180A00322B6D /* AjudaViewController.swift in Sources */,
+				C160032C20222E7E00B68F74 /* EntrarViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C1D4C83D2022256B007770C0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C1D4C83E2022256B007770C0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C1D4C8412022256B007770C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C1D4C8422022256B007770C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C1D4C8442022256B007770C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 033FD8E930E74A77678ECE99 /* Pods-BanheiroWC.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7N5B8K392A;
+				INFOPLIST_FILE = BanheiroWC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tcc.BanheiroWC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		C1D4C8452022256B007770C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4756E7E28CDA7D3C1D46F9B /* Pods-BanheiroWC.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7N5B8K392A;
+				INFOPLIST_FILE = BanheiroWC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tcc.BanheiroWC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C1D4C82C2022256B007770C0 /* Build configuration list for PBXProject "BanheiroWC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C1D4C8412022256B007770C0 /* Debug */,
+				C1D4C8422022256B007770C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C1D4C8432022256B007770C0 /* Build configuration list for PBXNativeTarget "BanheiroWC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C1D4C8442022256B007770C0 /* Debug */,
+				C1D4C8452022256B007770C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C1D4C8292022256B007770C0 /* Project object */;
+}
