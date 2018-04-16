@@ -15,12 +15,10 @@ Cada botao deve levar a uma nova tela:
 - Procurar Aluno -- OK!
 - Apagar aluno -- OK!
 - Listar todos os alunos -- OK!
-
 -Links
 - https://www.python-course.eu/tkinter_entry_widgets.php
 - http://effbot.org/tkinterbook/entry.htm
 - https://www.youtube.com/watch?v=JcFZl75WPUA
-
 >> MQTT
     > Topicos
         >Adicionar Alunos
@@ -29,9 +27,10 @@ Cada botao deve levar a uma nova tela:
         - software/Add/cpf
         - software/Add/senha
         - software/Add/sexo
-
 tati : 10121975495
 '''
+
+
 # TODO: Fazer pegar as funcoes q eu fiz em linha de comando
 
 # ON Message
@@ -60,7 +59,7 @@ def on_message(client, userdata, message):
             # e2.delete(0, END)
             # e3.delete(0, END)
             messagebox.showwarning("Erro", "Esse CPF já foi cadastrado")
-    #  Trocar Senha
+    # Trocar Senha
     if message.topic == "software/Trocar/validacao/Serv2Sw":
         print("Entrou 1")
         if message.payload.decode("utf-8") == "Valido":
@@ -76,31 +75,45 @@ def on_message(client, userdata, message):
             messagebox.showwarning("Erro", "Dados Inválidos")
     # Procurar Aluno
     if message.topic == "software/Procura/validacao/Serv2Sw":
-        if message.payload.decode("utf-8") == "Valido":
-            e7.delete(0, END)
-        #     TODO: Criar uma nova Pagina com os dados do Aluno!
-        if message.payload.decode("utf-8") == "Nao Valido":
-            e7.delete(0, END)
-            messagebox.showwarning("Erro", "Dados Inválidos")
+        print("!!!Recebeu!!!")
+        resposta = str(message.payload.decode("utf-8")).split("$")
+        # print(">>" + resposta[0])
+
+        if resposta[0] == "Valido":
+            print("Valido")
+            messagebox.showinfo("Dados de " + resposta[1],
+                                "**********************\n"+"Nome: " + resposta[1] + "\n" +
+                                "CPF: " + resposta[2] + "\n" +
+                                "Senha: " + resposta[3] + "\n"+
+                                "**********************\n")
+            # e7.delete(0, END)
+
+        if resposta[0] == "Nao Valido":
+            print("Nao valido")
+            messagebox.showwarning("Erro", "Esse Aluno não está cadastrado!")
+            # e7.delete(0, END)
     # Apagar Aluno
-    if message.topic == "software/Del/validacao/Serv2Sw":
+    if message.topic == "software/Apagar/validacao/Serv2Sw":
         if message.payload.decode("utf-8") == "Valido":
-            e8.delete(0, END)
+            print("Apagou")
+            # e8.delete(0, END)
         if message.payload.decode("utf-8") == "Nao Valido":
-            e8.delete(0, END)
+            # e8.delete(0, END)
             messagebox.showwarning("Erro", "Dados Inválidos")
     # Listar todos os alunos
     if message.topic == "software/Listar/validacao/Serv2Sw":
         if message.payload.decode("utf-8") == "Valido":
             e8.delete(0, END)
-        #     TODO: Criar uma nova pagina com uma lista dos alunos!
+        # TODO: Criar uma nova pagina com uma lista dos alunos!
         if message.payload.decode("utf-8") == "Nao Valido":
             e8.delete(0, END)
             messagebox.showwarning("Erro", "Dados Inválidos")
+
+
 # *****************************************************************************
 
 # Adicao de Alunos
-def SalvarDados2():
+def SalvarDados():
     print("Salvando Dados 2")
     print(e1.get())
     print(e2.get())
@@ -115,7 +128,7 @@ def SalvarDados2():
         # msg = str(nome) + "%" + str(cpf) + "%" + "Sexo" + "%" + str(senha)  # Message sended in Mqtt protocol
         msg = str(nome) + "%" + str(cpf) + "%" + str(senha)  # Message sended in Mqtt protocol
         # client.publish("software/Add_Aluno",msg)
-        client.publish("software/Add/validacao/Sw2Serv",msg)
+        client.publish("software/Add/validacao/Sw2Serv", msg)
         client.loop_start()
         time.sleep(0.5)
         e1.delete(0, END)
@@ -129,57 +142,32 @@ def SalvarDados2():
         messagebox.showwarning("Erro", "Dados Inválidos")
 
         print("Dados inválidos")
-def SalvarDados():
-    print("Enviando os dados...")
-    print(e1.get())
-    print(e2.get())
-    print(e3.get())
-    nome = e1.get()
-    cpf = e2.get()
-    senha = e3.get()
-    if cpfcnpj.validate(cpf) and True and len(senha)==4: # FIXME: Lembrar de validar o cpf no BD
-        print("Senha com tamanho certo")
-        msg = str(nome) + "%" + str(cpf) + "%" + "Sexo" + "%" + str(senha)  # Message sended in Mqtt protocol
-        # client.publish("software/Add_Aluno",msg)
-        print(msg)
-        e1.delete(0, END)
-        e2.delete(0, END)
-        e3.delete(0, END)
-        messagebox.showinfo("Informação", "Aluno adicionado com sucesso!")
-    else:
-        e1.delete(0, END)
-        e2.delete(0, END)
-        e3.delete(0, END)
-        messagebox.showwarning("Erro", "Dados Inválidos")
-
-        print("Dados inválidos")
-
 def AddAluno():
     TelaAddAlunos = Tk()
     TelaAddAlunos.title('Adicionar Alunos')
     TelaAddAlunos.geometry('400x200')
-    Label(TelaAddAlunos,text="Nome:").grid(row=0,sticky=E)
-    Label(TelaAddAlunos,text="CPF(Só números):").grid(row=1,sticky=E)
-    Label(TelaAddAlunos,text="Senha:").grid(row=2,sticky=E)
+    Label(TelaAddAlunos, text="Nome:").grid(row=0, sticky=E)
+    Label(TelaAddAlunos, text="CPF(Só números):").grid(row=1, sticky=E)
+    Label(TelaAddAlunos, text="Senha:").grid(row=2, sticky=E)
 
-    #Nome
+    # Nome
     global e1
     e1 = Entry(TelaAddAlunos)
-    #Cpf
+    # Cpf
     global e2
     e2 = Entry(TelaAddAlunos)
     # Senha
-    global  e3
-    e3 = Entry(TelaAddAlunos,show="*")
-    e1.grid(row=0,column=1)
-    e2.grid(row=1,column=1)
-    e3.grid(row=2,column=1)
+    global e3
+    e3 = Entry(TelaAddAlunos, show="*")
+    e1.grid(row=0, column=1)
+    e2.grid(row=1, column=1)
+    e3.grid(row=2, column=1)
     e1.focus_set()
     # Radio Button
     # Masculino = Radiobutton(TelaAddAlunos,text="Masculino",value=1,variable=teste,command=SelecSexo).grid(row=3,column=1) #FIXME!
     # Feminino = Radiobutton(TelaAddAlunos,text="Feminino",value=2,variable=teste).grid(row=3,column=2)
-        
-    Button(TelaAddAlunos, text='Adicionar', command=SalvarDados2).grid(row=6, column=1, sticky=W, pady=4) # row=3
+
+    Button(TelaAddAlunos, text='Adicionar', command=SalvarDados).grid(row=6, column=1, sticky=W, pady=4)  # row=3
     mainloop()
 # Mudança da Senha
 def AlterarSenha():
@@ -192,12 +180,12 @@ def AlterarSenha():
     senha_1 = e5.get()
     senha_2 = e6.get()
 
-    if senha_1 == senha_2 and cpfcnpj.validate(cpf) and len(senha_1)==4: # FIXME: Lembrar de validar o cpf no BD:
+    if senha_1 == senha_2 and cpfcnpj.validate(cpf) and len(senha_1) == 4:  # FIXME: Lembrar de validar o cpf no BD:
         print("Válido")
-        #TODO: Enviar os dados
+        # TODO: Enviar os dados
         msg = str(cpf) + "%" + str(senha_1)
         print(msg)
-        client.publish("software/Trocar/validacao/Sw2Serv",msg)
+        client.publish("software/Trocar/validacao/Sw2Serv", msg)
         client.loop_start()
         time.sleep(0.5)
         e4.delete(0, END)
@@ -219,9 +207,9 @@ def MudancaSenha():
     '''
     TelaMudancaSenha.title("Adicionar Alunos")
     TelaMudancaSenha.geometry('400x200')
-    Label(TelaMudancaSenha, text="CPF(Só números):").grid(row=0,sticky=E)
-    Label(TelaMudancaSenha, text="Nova Senha:").grid(row=1,sticky=E)
-    Label(TelaMudancaSenha, text="Digite novamente a Senha:").grid(row=2,sticky=E)
+    Label(TelaMudancaSenha, text="CPF(Só números):").grid(row=0, sticky=E)
+    Label(TelaMudancaSenha, text="Nova Senha:").grid(row=1, sticky=E)
+    Label(TelaMudancaSenha, text="Digite novamente a Senha:").grid(row=2, sticky=E)
     # CPF
     global e4
     e4 = Entry(TelaMudancaSenha)
@@ -234,6 +222,7 @@ def MudancaSenha():
     e4.grid(row=0, column=1)
     e5.grid(row=1, column=1)
     e6.grid(row=2, column=1)
+    e4.focus_set()
     Button(TelaMudancaSenha, text='Mudar Senha', command=AlterarSenha).grid(row=3, column=1, sticky=W, pady=4)
     mainloop()
 # Procura de Aluno
@@ -241,41 +230,40 @@ def Procurar():
     print("Procurando...")
 
     if cpfcnpj.validate(e7.get()):
-        # TODO: O servidor deve tratar as informacoes para evitar congestionamento de informacoes
-        # Mandar uma msg mqtt com o cpf e escutar a resposta
         print(e7.get())
         msg = str(e7.get())
-        client.publish("software/Procurar/validacao/Sw2Serv",msg)
-
+        client.publish("software/Procura/validacao/Sw2Serv", msg)
+        client.loop_start()
         # e7.delete(0, END)
 
     #     No onmessage ele deve criar outra tela com as informacoes do estudante
     else:
         print("Dados Inválidos")
-        messagebox.showwarning("Erro", "Dados Inválidos")
+        messagebox.showwarning("Erro", "Cpf Inválido!")
         e7.delete(0, END)
 def ProcuraAluno():
     print("Procurando Aluno")
     TelaProcuraAluno = Tk()
     TelaProcuraAluno.title("Procura de Alunos")
     TelaProcuraAluno.geometry('500x250')
-    Label(TelaProcuraAluno,text="Digite o CPF do aluno desejado:").grid(row=0,sticky=E)
+    Label(TelaProcuraAluno, text="Digite o CPF do aluno desejado:").grid(row=0, sticky=E)
     # CPF
     global e7
     e7 = Entry(TelaProcuraAluno)
     e7.grid(row=0, column=1)
-    Button(TelaProcuraAluno,text="Procurar",command=Procurar).grid(row=3, column=1, sticky=W, pady=2)
+    e7.focus_set()
+    Button(TelaProcuraAluno, text="Procurar", command=Procurar).grid(row=3, column=1, sticky=W, pady=2)
     mainloop()
 # Apagar Alunos
 def Apagar():
     print("Apagando...")
-    if cpfcnpj.validate(e8.get()): #FIXME: Fazer a leitura do Banco de Dados
+    if cpfcnpj.validate(e8.get()):  # FIXME: Fazer a leitura do Banco de Dados
         # Mandar uma msg mqtt com o cpf e escutar a resposta
         print(e8.get())
-        if messagebox.askyesno("Alerta","Deseja realmente apagar esse aluno?"):
+        if messagebox.askyesno("Alerta", "Deseja realmente apagar esse aluno?"):
             msg = str(e8.get())
-            client.publish("software/Del/validacao/Sw2Serv",msg)
-
+            client.publish("software/Apagar/validacao/Sw2Serv", msg)
+            client.loop_start()
             # messagebox.showinfo("Informação", "Aluno apagado com sucesso!")
             # e8.delete(0, END)
         else:
@@ -299,7 +287,9 @@ def ApagarAluno():
 # Listar Todos os Alunos
 def ListarAlunos():
     print("Listando Alunos")
-    client.publish("software/Listar/validacao/Sw2Serv","Listar")
+    client.publish("software/Listar/validacao/Sw2Serv", "Listar")
+
+
 #     TODO: Msg em MQTT dizendo para retornar todos os alunos:
 
 
@@ -311,28 +301,34 @@ telaPrincipalLabel = Label(TelaPrincipal, height=2, text="Selecione o que deseja
 # telaPrincipalLabel.grid(row= 0, column = 0 )
 telaPrincipalLabel.grid(row=0, column=0, sticky=E)
 
-AddAlunosbutton = Button(TelaPrincipal,height=1,font = "Arial 20 normal",text=   "Adicionar Alunos        ",command = AddAluno)
-MudarSenahbutton = Button(TelaPrincipal,height=1,font = "Arial 20 normal", text= "Mudar Senha             ",command = MudancaSenha)
-ProcurarAlunobutton = Button(TelaPrincipal,height=1,font ="Arial 20 normal",text="Procurar Aluno           ",command = ProcuraAluno)
-ApagarAlunobutton = Button(TelaPrincipal,height=1, font = "Arial 20 normal",text="Apagar Aluno             ",command = ApagarAluno)
-ListarTodosbutton = Button(TelaPrincipal,height=1,font = "Arial 20 normal", text="Listar todos os Alunos",command = ListarAlunos)
+AddAlunosbutton = Button(TelaPrincipal, height=1, font="Arial 20 normal", text="Adicionar Alunos        ",
+                         command=AddAluno)
+MudarSenahbutton = Button(TelaPrincipal, height=1, font="Arial 20 normal", text="Mudar Senha             ",
+                          command=MudancaSenha)
+ProcurarAlunobutton = Button(TelaPrincipal, height=1, font="Arial 20 normal", text="Procurar Aluno           ",
+                             command=ProcuraAluno)
+ApagarAlunobutton = Button(TelaPrincipal, height=1, font="Arial 20 normal", text="Apagar Aluno             ",
+                           command=ApagarAluno)
+ListarTodosbutton = Button(TelaPrincipal, height=1, font="Arial 20 normal", text="Listar todos os Alunos",
+                           command=ListarAlunos)
 
-
-AddAlunosbutton.grid(row=1, column=0,sticky=W)
-MudarSenahbutton.grid(row=2, column=0,sticky=W)
-ProcurarAlunobutton.grid(row=3, column=0,sticky=W)
-ApagarAlunobutton.grid(row=4, column=0,sticky=W)
-ListarTodosbutton.grid(row=5, column=0,sticky=W)
+AddAlunosbutton.grid(row=1, column=0, sticky=W)
+MudarSenahbutton.grid(row=2, column=0, sticky=W)
+ProcurarAlunobutton.grid(row=3, column=0, sticky=W)
+ApagarAlunobutton.grid(row=4, column=0, sticky=W)
+ListarTodosbutton.grid(row=5, column=0, sticky=W)
 
 # MQTT
 client = mqtt.Client("Software DA")
 client.on_message = on_message
-client.connect("192.168.1.3", 5050) # todo: Testar com o servidor!
+client.connect("192.168.1.2", 5050)  # todo: Testar com o servidor!
 client.subscribe("software/Add/validacao/Sw2Serv")
 client.subscribe("software/Add/validacao/Serv2Sw")
 client.subscribe("software/Trocar/validacao/Serv2Sw")
+client.subscribe("software/Procura/validacao/Serv2Sw")
+client.subscribe("software/Procura/validacao/Sw2Serv")
+client.subscribe("software/Apagar/validacao/Serv2Sw")
+client.subscribe("software/Apagar/validacao/Sw2Serv")
 
 
 telaPrincipalLabel.mainloop()
-
-
