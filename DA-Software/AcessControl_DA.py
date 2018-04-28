@@ -31,12 +31,6 @@ tati : 10121975495
 '''
 
 
-# TODO: Fazer pegar as funcoes q eu fiz em linha de comando
-
-# ON Message
-# Tratando os dados recebidos por MQTT
-
-
 def on_message(client, userdata, message):
     print("Message received: " + str(message.payload.decode("utf-8")))
     print("Topic: " + str(message.topic))
@@ -47,7 +41,6 @@ def on_message(client, userdata, message):
         if message.payload.decode("utf-8") == "Valido":
             print("Entrou 2")
             messagebox.showinfo("Informação", "Aluno adicionado com sucesso!")
-
             # e1.delete(0,END)
             # e1.delete(0, END)
             # e2.delete(0, END)
@@ -101,16 +94,18 @@ def on_message(client, userdata, message):
             # e8.delete(0, END)
             messagebox.showwarning("Erro", "Dados Inválidos")
     # Listar todos os alunos
-    if message.topic == "software/Listar/validacao/Serv2Sw":
-        if message.payload.decode("utf-8") == "Valido":
-            e8.delete(0, END)
-        # TODO: Criar uma nova pagina com uma lista dos alunos!
-        if message.payload.decode("utf-8") == "Nao Valido":
-            e8.delete(0, END)
-            messagebox.showwarning("Erro", "Dados Inválidos")
+    if message.topic == "software/ListarTodos/validacao/Serv2Sw":
+        dados = message.payload.decode("utf-8")
+        alunos = (str(dados).split("?"))
+        alunos.pop()
+        info = open("ListaAlunos.txt", "w")
+        info.write("*************************************************\n############ Lista de Todos os Alunos ###########\n*************************************************\n")
+        for row in alunos:
+            # dados_alunos = row
+            dados_alunos = row.split("$")
+            info.write("Nome: "+ dados_alunos[0] +"\nCPF: " + dados_alunos[1]+ "\nSexo: " + dados_alunos[2] + "\n***********************\n")
 
-
-# *****************************************************************************
+        info.close()
 
 # Adicao de Alunos
 def SalvarDados():
@@ -122,12 +117,15 @@ def SalvarDados():
     nome = e1.get()
     cpf = e2.get()
     senha = e3.get()
+    # sexo = str(S)
 
     if cpfcnpj.validate(cpf) and len(senha) == 4:
         print("Senha com tamanho certo")
         # msg = str(nome) + "%" + str(cpf) + "%" + "Sexo" + "%" + str(senha)  # Message sended in Mqtt protocol
-        msg = str(nome) + "%" + str(cpf) + "%" + str(senha)  # Message sended in Mqtt protocol
-        # client.publish("software/Add_Aluno",msg)
+
+        msg = str(nome) + "%" + str(cpf) + "%" + "sexo" + "%" + str(senha)  # Message sended in Mqtt protocol
+
+
         client.publish("software/Add/validacao/Sw2Serv", msg)
         client.loop_start()
         time.sleep(0.5)
@@ -136,12 +134,11 @@ def SalvarDados():
         e3.delete(0, END)
         print(msg)
     else:
+        print("Dados Incorrentos")
         e1.delete(0, END)
         e2.delete(0, END)
         e3.delete(0, END)
         messagebox.showwarning("Erro", "Dados Inválidos")
-
-        print("Dados inválidos")
 def AddAluno():
     TelaAddAlunos = Tk()
     TelaAddAlunos.title('Adicionar Alunos')
@@ -163,11 +160,35 @@ def AddAluno():
     e2.grid(row=1, column=1)
     e3.grid(row=2, column=1)
     e1.focus_set()
-    # Radio Button
-    # Masculino = Radiobutton(TelaAddAlunos,text="Masculino",value=1,variable=teste,command=SelecSexo).grid(row=3,column=1) #FIXME!
-    # Feminino = Radiobutton(TelaAddAlunos,text="Feminino",value=2,variable=teste).grid(row=3,column=2)
+    Button(TelaAddAlunos, text='Adicionar', command=SalvarDados).grid(row=7, column=1, sticky=W, pady=4)
+    # Sexo
+    # Masc = IntVar()
+    # Fem = IntVar()
+    # MascCheck = Checkbutton(TelaAddAlunos, text="male", variable=Masc)
+    # MascCheck.grid(row=4, sticky=W)
+    # FemCheck = Checkbutton(TelaAddAlunos, text="female", variable=Fem)
+    # FemCheck.grid(row=5, sticky=W)
 
-    Button(TelaAddAlunos, text='Adicionar', command=SalvarDados).grid(row=6, column=1, sticky=W, pady=4)  # row=3
+    # FIXME: Fazer essa parte de add sexo
+    # TODO: Da um PULL no git pois isso nao esta mais funcionando!!!!
+    # if Masc == 1 and Fem == 1:
+    #     print("Ambos os sexos foram escolhidos! Error")
+    #     MascCheck.toggle()
+    #     FemCheck.toggle()
+    #     print("Dados Incorrentos")
+    #     e1.delete(0, END)
+    #     e2.delete(0, END)
+    #     e3.delete(0, END)
+    #     messagebox.showwarning("Erro", "Dados Inválidos")
+    # else:
+    #     print("Dados Corretos")
+    #     if Masc == 1:
+    #         sexo = Masc
+    #         MascCheck.toggle()
+    #     if Fem == 1:
+    #         sexo = Fem
+    #         FemCheck.toggle()
+    #       # row=3
     mainloop()
 # Mudança da Senha
 def AlterarSenha():
@@ -264,8 +285,7 @@ def Apagar():
             msg = str(e8.get())
             client.publish("software/Apagar/validacao/Sw2Serv", msg)
             client.loop_start()
-            # messagebox.showinfo("Informação", "Aluno apagado com sucesso!")
-            # e8.delete(0, END)
+            e8.delete(0, END)
         else:
             pass
     else:
@@ -276,7 +296,7 @@ def ApagarAluno():
     print("Apagar Aluno")
     TelaApagarAluno = Tk()
     TelaApagarAluno.title("Apagar Alunos")
-    TelaApagarAluno.geometry('400x250')
+    TelaApagarAluno.geometry('500x250')
     Label(TelaApagarAluno, text="Digite o CPF do aluno desejado:").grid(row=0, sticky=E)
     # CPF
     global e8
@@ -287,11 +307,8 @@ def ApagarAluno():
 # Listar Todos os Alunos
 def ListarAlunos():
     print("Listando Alunos")
-    client.publish("software/Listar/validacao/Sw2Serv", "Listar")
-
-
-#     TODO: Msg em MQTT dizendo para retornar todos os alunos:
-
+    client.publish("software/ListarTodos/validacao/Sw2Serv", "Listar")
+    client.loop_start()
 
 # Tela Inicial
 TelaPrincipal = Tk()
@@ -329,6 +346,6 @@ client.subscribe("software/Procura/validacao/Serv2Sw")
 client.subscribe("software/Procura/validacao/Sw2Serv")
 client.subscribe("software/Apagar/validacao/Serv2Sw")
 client.subscribe("software/Apagar/validacao/Sw2Serv")
-
+client.subscribe("software/ListarTodos/validacao/Serv2Sw")
 
 telaPrincipalLabel.mainloop()
