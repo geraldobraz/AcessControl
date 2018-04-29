@@ -113,7 +113,7 @@ def SalvarDados():
     print(e3.get())
 
     nome = e1.get()
-    cpf = e2.get()
+    cpf = "".join([str(s) for s in list(e2.get()) if s.isdigit()]) #Aceitando cpfs com "." e "-"
     senha = e3.get()
     # sexo = str(S)
 
@@ -194,7 +194,7 @@ def AlterarSenha():
     print(e5.get())
     print(e6.get())
 
-    cpf = e4.get()
+    cpf = "".join([str(s) for s in list(e4.get()) if s.isdigit()]) #Aceitando cpfs com "." e "-"
     senha_1 = e5.get()
     senha_2 = e6.get()
 
@@ -209,11 +209,13 @@ def AlterarSenha():
         e4.delete(0, END)
         e5.delete(0, END)
         e6.delete(0, END)
+        e4.focus_set()
         # messagebox.showinfo("Informação", "Senha Alterada com sucesso!")
     else:
         e4.delete(0, END)
         e5.delete(0, END)
         e6.delete(0, END)
+        e4.focus_set()
         messagebox.showwarning("Erro", "Dados Inválidos")
         print("Dado Inválido")
 def MudancaSenha():
@@ -247,9 +249,10 @@ def MudancaSenha():
 def Procurar():
     print("Procurando...")
 
-    if cpfcnpj.validate(e7.get()):
+    cpf = "".join([str(s) for s in list(e7.get()) if s.isdigit()])  # Aceitando cpfs com "." e "-"
+    if cpfcnpj.validate(cpf):
         print(e7.get())
-        msg = str(e7.get())
+        msg = cpf
         client.publish("software/Procura/validacao/Sw2Serv", msg)
         client.loop_start()
         # e7.delete(0, END)
@@ -275,11 +278,12 @@ def ProcuraAluno():
 # Apagar Alunos
 def Apagar():
     print("Apagando...")
-    if cpfcnpj.validate(e8.get()):  # FIXME: Fazer a leitura do Banco de Dados
+    cpf = "".join([str(s) for s in list(e8.get()) if s.isdigit()])
+    if cpfcnpj.validate(cpf):
         # Mandar uma msg mqtt com o cpf e escutar a resposta
-        print(e8.get())
+        print(cpf)
         if messagebox.askyesno("Alerta", "Deseja realmente apagar esse aluno?"):
-            msg = str(e8.get())
+            msg = cpf
             client.publish("software/Apagar/validacao/Sw2Serv", msg)
             client.loop_start()
             e8.delete(0, END)
