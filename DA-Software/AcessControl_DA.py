@@ -5,6 +5,7 @@ import paho.mqtt.client as mqtt
 from pycpfcnpj import cpfcnpj
 import os
 from tkinter import messagebox
+import time
 
 # TODO
 '''
@@ -75,7 +76,7 @@ def on_message(client, userdata, message):
             messagebox.showinfo("Dados de " + resposta[1],
                                 "**********************\n"+"Nome: " + resposta[1] + "\n" +
                                 "CPF: " + resposta[2] + "\n" +
-                                "Senha: " + resposta[3] + "\n"+
+                                "Sexo: " + resposta[3] + "\n"+
                                 "**********************\n")
             # e7.delete(0, END)
 
@@ -96,6 +97,7 @@ def on_message(client, userdata, message):
         dados = message.payload.decode("utf-8")
         alunos = (str(dados).split("?"))
         alunos.pop()
+        # TODO: Colocar a data e hora no header da Lista de Alunos
         info = open("ListaAlunos.txt", "w")
         info.write("*************************************************\n############ Lista de Todos os Alunos ###########\n*************************************************\n")
         for row in alunos:
@@ -111,38 +113,51 @@ def SalvarDados():
     print(e1.get())
     print(e2.get())
     print(e3.get())
+    print(e4.get())
+
+
 
     nome = e1.get()
     cpf = "".join([str(s) for s in list(e2.get()) if s.isdigit()]) #Aceitando cpfs com "." e "-"
     senha = e3.get()
-    # sexo = str(S)
+    sexo = e4.get()
 
-    if cpfcnpj.validate(cpf) and len(senha) == 4:
-        print("Senha com tamanho certo")
-        msg = str(nome) + "%" + str(cpf) + "%" + "sexo" + "%" + str(senha)  # Message sended in Mqtt protocol
+    if sexo == "M" or sexo == "F":
+        if sexo == "M":
+            sexo="Masculino"
+        else:
+            sexo="Feminino"
 
+        if cpfcnpj.validate(cpf) and len(senha) == 4:
+            print("Senha com tamanho certo")
+            msg = str(nome) + "%" + str(cpf) + "%" + str(sexo) + "%" + str(senha)  # Message sended in Mqtt protocol
 
-        client.publish("software/Add/validacao/Sw2Serv", msg)
-        client.loop_start()
-        time.sleep(0.5)
-        e1.delete(0, END)
-        e2.delete(0, END)
-        e3.delete(0, END)
-        e1.focus_set()
-        print(msg)
+            client.publish("software/Add/validacao/Sw2Serv", msg)
+            client.loop_start()
+            time.sleep(0.5)
+            e1.delete(0, END)
+            e2.delete(0, END)
+            e3.delete(0, END)
+            e4.delete(0, END)
+            e1.focus_set()
+            print(msg)
+
     else:
         print("Dados Incorrentos")
         e1.delete(0, END)
         e2.delete(0, END)
         e3.delete(0, END)
+        e4.delete(0, END)
+        e1.focus_set()
         messagebox.showwarning("Erro", "Dados Inválidos")
 def AddAluno():
     TelaAddAlunos = Tk()
     TelaAddAlunos.title('Adicionar Alunos')
     TelaAddAlunos.geometry('400x200')
     Label(TelaAddAlunos, text="Nome:").grid(row=0, sticky=E)
-    Label(TelaAddAlunos, text="CPF(Só números):").grid(row=1, sticky=E)
+    Label(TelaAddAlunos, text="CPF:").grid(row=1, sticky=E)
     Label(TelaAddAlunos, text="Senha:").grid(row=2, sticky=E)
+    Label(TelaAddAlunos, text="Sexo (M ou F):").grid(row=3, sticky=E)
 
     # Nome
     global e1
@@ -153,39 +168,18 @@ def AddAluno():
     # Senha
     global e3
     e3 = Entry(TelaAddAlunos, show="*")
+    # Sexo
+    global e4
+    e4 = Entry(TelaAddAlunos)
+
     e1.grid(row=0, column=1)
     e2.grid(row=1, column=1)
     e3.grid(row=2, column=1)
+    e4.grid(row=3, column=1)
+
+
     e1.focus_set()
     Button(TelaAddAlunos, text='Adicionar', command=SalvarDados).grid(row=7, column=1, sticky=W, pady=4)
-    # Sexo
-    # Masc = IntVar()
-    # Fem = IntVar()
-    # MascCheck = Checkbutton(TelaAddAlunos, text="male", variable=Masc)
-    # MascCheck.grid(row=4, sticky=W)
-    # FemCheck = Checkbutton(TelaAddAlunos, text="female", variable=Fem)
-    # FemCheck.grid(row=5, sticky=W)
-
-    # FIXME: Fazer essa parte de add sexo
-    # TODO: Da um PULL no git pois isso nao esta mais funcionando!!!!
-    # if Masc == 1 and Fem == 1:
-    #     print("Ambos os sexos foram escolhidos! Error")
-    #     MascCheck.toggle()
-    #     FemCheck.toggle()
-    #     print("Dados Incorrentos")
-    #     e1.delete(0, END)
-    #     e2.delete(0, END)
-    #     e3.delete(0, END)
-    #     messagebox.showwarning("Erro", "Dados Inválidos")
-    # else:
-    #     print("Dados Corretos")
-    #     if Masc == 1:
-    #         sexo = Masc
-    #         MascCheck.toggle()
-    #     if Fem == 1:
-    #         sexo = Fem
-    #         FemCheck.toggle()
-    #       # row=3
     mainloop()
 # Mudança da Senha
 def AlterarSenha():
@@ -227,7 +221,7 @@ def MudancaSenha():
     '''
     TelaMudancaSenha.title("Adicionar Alunos")
     TelaMudancaSenha.geometry('400x200')
-    Label(TelaMudancaSenha, text="CPF(Só números):").grid(row=0, sticky=E)
+    Label(TelaMudancaSenha, text="CPF:").grid(row=0, sticky=E)
     Label(TelaMudancaSenha, text="Nova Senha:").grid(row=1, sticky=E)
     Label(TelaMudancaSenha, text="Digite novamente a Senha:").grid(row=2, sticky=E)
     # CPF
@@ -282,7 +276,7 @@ def Apagar():
     if cpfcnpj.validate(cpf):
         # Mandar uma msg mqtt com o cpf e escutar a resposta
         print(cpf)
-        if messagebox.askyesno("Alerta", "Deseja realmente apagar esse aluno?"):
+        if messagebox.askyesno("Alerta", "Deseja realmente apagar o aluno com CPF: "+ str(cpf)+ " ?"):
             msg = cpf
             client.publish("software/Apagar/validacao/Sw2Serv", msg)
             client.loop_start()
@@ -303,6 +297,7 @@ def ApagarAluno():
     global e8
     e8 = Entry(TelaApagarAluno)
     e8.grid(row=0, column=1)
+    e8.focus_set()
     Button(TelaApagarAluno, text="Apagar", command=Apagar).grid(row=3, column=1, sticky=W, pady=2)
     mainloop()
 # Listar Todos os Alunos
