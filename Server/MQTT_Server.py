@@ -1,5 +1,5 @@
 ######################################################################
-#                       Servidor Certo                               #
+#                            Servidor                                #
 ######################################################################
 
 
@@ -16,15 +16,11 @@ cnx = mysql.connector.connect(user='root', password='senha',
 # Funcoes MySQL
 
 add_Alunos = ("INSERT INTO Alunos "
-               "(NOME,CPF,SENHA) "
-               "VALUES (%s, %s, %s)")
+               "(NOME,CPF,SEXO,SENHA) "
+               "VALUES (%s, %s, %s, %s)")
 
 update_senha = ("UPDATE Alunos SET SENHA = %s"
               "WHERE CPF = %s")
-
-# procura_dados = ("SELECT NOME,CPF,SENHA"
-#                  "FROM Alunos"
-#                  "WHERE CPF = %s")
 
 # Funcoes######
 
@@ -70,7 +66,7 @@ def ProcuraCpf(ValorCpf):
     cursor.close()
     return validador_cpf
 def ProcuraAluno(ValorCpf):
-    procura_dados = ("SELECT NOME,CPF,SENHA "
+    procura_dados = ("SELECT NOME,CPF,SEXO "
                      "FROM Alunos "
                      "WHERE CPF = %(cpf_atual)s")
     cursor = cnx.cursor()
@@ -92,11 +88,22 @@ def ApagarAluno(ValorCpf):
     cnx.commit()
     cursor.close()
     print ("Apagou o Aluno: ", ValorCpf)
+def ListarAlunos():
+    listar_alunos = ("SELECT NOME, CPF, SEXO FROM Alunos ORDER BY NOME")
+    cursor = cnx.cursor()
+    cursor.execute(listar_alunos)
+    dados = []
+    # FIXME: Tratar tabelas vazias!
+    for row in cursor:
+        # DadosAluno+?+DadosAluno+?+...
+        dados.append("$".join(row) + "?")
+    cursor.close()
+    return "".join(dados)
 
 def on_message(client, userdata, message):
     print ("Message received: " + str(message.payload.decode("utf-8")))
     print ("Topic: " + str (message.topic) )
-
+    # Receber os dados do celular
     if message.topic == "celular/dados":
         print("Dados")
         dado = str(message.payload.decode("utf-8")).split("$")
@@ -108,7 +115,7 @@ def on_message(client, userdata, message):
             client.publish("celular/dados/resposta", "ok")
         else:
             client.publish("celular/dados/resposta", "nao")
-
+    # Abrir porta Masc
     if message.topic == "celular/porta":
         print(">>Topic: celular/porta/Masc")
         resp = str(message.payload.decode("utf-8"))
@@ -121,7 +128,7 @@ def on_message(client, userdata, message):
             print("Ligou!")
         if message.payload.decode("utf-8") == "OFF":
             print("Desligou!")
-
+    # Abrir porta Fem
     if message.topic == "celular/porta/Fem":
         print(">>Topic: celular/porta/Fem")
         resp = str(message.payload.decode("utf-8"))
@@ -135,15 +142,15 @@ def on_message(client, userdata, message):
         if message.payload.decode("utf-8") == "OFF":
             print("Desligou!")
         #------------------------
-
+    # Adicao de Aluno
     if message.topic == "software/Add/validacao/Sw2Serv":
         print("Dados")
         dado = str(message.payload.decode("utf-8")).split("%")
         print (dado[1])
-        #dado[0]: Nome #dado[1]: CPF #dado[2]: Senha
+        #dado[0]: Nome #dado[1]: CPF #dado[2]: Sexo #dado[3]: Senha
         if not ProcuraCpf(dado[1]):
             print ("Cpf Nao existe no BD :)")
-            data_Alunos = (dado[0],dado[1],dado[2])
+            data_Alunos = (dado[0],dado[1],dado[2],dado[3])
             cursor = cnx.cursor()
             cursor.execute(add_Alunos, data_Alunos)
             cnx.commit()
@@ -155,7 +162,7 @@ def on_message(client, userdata, message):
         else:
             print ("CPF existe no Banco")
             client.publish("software/Add/validacao/Serv2Sw", "Nao Valido")
-
+    # Trocar Senha
     if message.topic == "software/Trocar/validacao/Sw2Serv":
         print("Dados")
         dado = str(message.payload.decode("utf-8")).split("%")
@@ -176,7 +183,7 @@ def on_message(client, userdata, message):
         else:
             print ("CPF existe no Banco")
             client.publish("software/Trocar/validacao/Serv2Sw", "Nao Valido")
-
+    # Listar Aluno Especifico
     if message.topic == "software/Procura/validacao/Sw2Serv":
         dado = str(message.payload.decode("utf-8"))
         if ProcuraCpf(dado):
@@ -185,16 +192,21 @@ def on_message(client, userdata, message):
             print ("Enviou!")
         else:
             client.publish("software/Procura/validacao/Serv2Sw", "Nao Valido$" + ProcuraAluno(dado))
-
+    # Apagar Aluno
     if message.topic == "software/Apagar/validacao/Sw2Serv":
         dado = str(message.payload.decode("utf-8"))
         if ProcuraCpf(dado):
             ApagarAluno(dado)
             client.publish("software/Apagar/validacao/Serv2Sw", "Valido")
-            print ("Enviou!")
+            # print ("Enviou!")
         else:
             client.publish("software/Apagar/validacao/Serv2Sw", "Nao Valido")
-
+    # Listar todos os Alunos
+    if message.topic == "software/ListarTodos/validacao/Sw2Serv":
+        dado = str(message.payload.decode("utf-8"))
+        if dado == "Listar":
+            client.publish("software/ListarTodos/validacao/Serv2Sw", ListarAlunos())
+            print ("Enviou!",ListarAlunos())
 
 
 # Criando um cliente novo
@@ -219,6 +231,7 @@ client.subscribe("software/Add/validacao/Sw2Serv")
 client.subscribe("software/Add/validacao/Serv2Sw")
 client.subscribe("software/Trocar/validacao/Sw2Serv")
 client.subscribe("software/Procura/validacao/Sw2Serv")
+client.subscribe("software/ListarTodos/validacao/Sw2Serv")
 client.subscribe("software/Apagar/validacao/Sw2Serv")
 
 
