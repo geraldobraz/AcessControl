@@ -29,8 +29,6 @@ Cada botao deve levar a uma nova tela:
         - software/Add/sexo
 tati : 10121975495
 '''
-
-
 def on_message(client, userdata, message):
     print("Message received: " + str(message.payload.decode("utf-8")))
     print("Topic: " + str(message.topic))
@@ -121,8 +119,6 @@ def SalvarDados():
 
     if cpfcnpj.validate(cpf) and len(senha) == 4:
         print("Senha com tamanho certo")
-        # msg = str(nome) + "%" + str(cpf) + "%" + "Sexo" + "%" + str(senha)  # Message sended in Mqtt protocol
-
         msg = str(nome) + "%" + str(cpf) + "%" + "sexo" + "%" + str(senha)  # Message sended in Mqtt protocol
 
 
@@ -132,6 +128,7 @@ def SalvarDados():
         e1.delete(0, END)
         e2.delete(0, END)
         e3.delete(0, END)
+        e1.focus_set()
         print(msg)
     else:
         print("Dados Incorrentos")
@@ -338,7 +335,7 @@ ListarTodosbutton.grid(row=5, column=0, sticky=W)
 # MQTT
 client = mqtt.Client("Software DA")
 client.on_message = on_message
-client.connect("192.168.1.2", 5050)  # todo: Testar com o servidor!
+client.connect("192.168.1.2", 5050)
 client.subscribe("software/Add/validacao/Sw2Serv")
 client.subscribe("software/Add/validacao/Serv2Sw")
 client.subscribe("software/Trocar/validacao/Serv2Sw")
