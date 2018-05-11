@@ -24,7 +24,7 @@ class EntrarViewController: UIViewController {
     var vaiCPF: String = ""
     let aciona = AcionamentoViewController()
     var wait: UIActivityIndicatorView = UIActivityIndicatorView()
-    let mqttClient = CocoaMQTT(clientID: "iOS Device", host:"192.168.1.3", port: 5050) // Configurações do MQTT
+    let mqttClient = CocoaMQTT(clientID: "iOS Device", host:"192.168.1.2", port: 5050) // Configurações do MQTT
     
     
     override func viewDidLoad() {
@@ -96,20 +96,7 @@ class EntrarViewController: UIViewController {
         nome = cpfUsuario.text! + "$" + senhaUsuario.text!
         mqttClient.publish("celular/dados", withString: nome)
         
-        // >>Guardar os dados FIXME:
-        //            UserDefaults.standard.set(true, forKey: "GD")
-//        UserDefaults.standard.set(false, forKey: "GD")
-//
-//        if ((UserDefaults.standard.object(forKey: "GD")) != nil){
-//            print("\n\n")
-//            print("aqui")
-//            print(UserDefaults.standard.object(forKey: "GD"))
-//
-//        }else{
-//            print("\n\n")
-//            print(UserDefaults.standard.object(forKey: "GD"))
-//            print("ali")
-//        }
+
         
         
     }
@@ -177,20 +164,52 @@ extension EntrarViewController: CocoaMQTTDelegate{
 //
 //        }
         
+/*Teste
+         
+         
+         
+         */
+      
+        
         if(message.topic == "celular/dados/resposta"){
-           // let dados = message.string?.components(separatedBy: "%")
+        
             
-            if(message.string! == "ok"){
+            if(message.string! == "Masc"){
                 wait.stopAnimating()
-                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                self.performSegue(withIdentifier: "loginMasc", sender: nil) // FIXME: Colocar um segue para uma tela masc
             }
-            //if(message.string! == "nao ok"){
+            
+            if(message.string! == "Fem"){
+                wait.stopAnimating()
+                self.performSegue(withIdentifier: "loginFem", sender: nil)// FIXME: Colocar um segue para uma tela fem
+            }
+            
+            
             if(message.string! == "nao"){
                 wait.stopAnimating()
                 exibirMensagem(titulo: "CPF ou senha incorretos", mensagem: "Digite novamente.")
             }
-        
+            
         }
+        
+        
+        
+// Antigo (Certo)
+        
+//        if(message.topic == "celular/dados/resposta"){
+//           // let dados = message.string?.components(separatedBy: "%")
+//
+//            if(message.string! == "ok"){
+//                wait.stopAnimating()
+//                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+//            }
+//            //if(message.string! == "nao ok"){
+//            if(message.string! == "nao"){
+//                wait.stopAnimating()
+//                exibirMensagem(titulo: "CPF ou senha incorretos", mensagem: "Digite novamente.")
+//            }
+//
+//        }
         
         
         

@@ -156,14 +156,15 @@
                     <connections>
                         <outlet property="cpfUsuario" destination="Yqn-Je-xN6" id="guw-2z-3Uj"/>
                         <outlet property="senhaUsuario" destination="t1G-Qz-vdU" id="rlN-Xv-FWn"/>
-                        <segue destination="cF0-cO-Ax2" kind="presentation" identifier="loginSegue" id="wgt-Bf-Yj9"/>
+                        <segue destination="pm1-rU-ykM" kind="presentation" identifier="loginMasc" id="Xj5-Za-ul2"/>
+                        <segue destination="4LC-1f-G1j" kind="presentation" identifier="loginFem" id="QMA-ao-YSK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hkc-rW-7GX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1644" y="-291.00449775112446"/>
+            <point key="canvasLocation" x="2330" y="117"/>
         </scene>
-        <!--Tela Principal-->
+        <!--Acionamento da Porta-->
         <scene sceneID="oDG-Iy-5e2">
             <objects>
                 <viewController id="ukF-Y8-fs2" customClass="AcionamentoViewController" customModule="BanheiroWC" customModuleProvider="target" sceneMemberID="viewController">
@@ -213,19 +214,99 @@
                                 <connections>
                                     <action selector="Sair:" destination="qVW-uv-rrd" eventType="touchUpInside" id="KMg-Dx-fik"/>
                                     <action selector="SairLogin:" destination="ukF-Y8-fs2" eventType="touchUpInside" id="wRg-jO-PEC"/>
-                                    <segue destination="uhc-EQ-dZ5" kind="presentation" identifier="sairLogin" id="AoD-Ve-sFz"/>
+                                    <segue destination="uhc-EQ-dZ5" kind="presentation" identifier="sairloginMasc" id="Sy3-SV-9pN"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.49408316612243652" green="0.49414330720901489" blue="0.49405616521835327" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="F8d-CZ-FQE"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Tela Principal" id="VOy-p9-e1D"/>
+                    <navigationItem key="navigationItem" title="Acionamento da Porta" id="VOy-p9-e1D"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Li-fC-1zf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="qVW-uv-rrd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3741.5999999999999" y="-292.80359820089956"/>
+            <point key="canvasLocation" x="5678" y="-1012"/>
+        </scene>
+        <!--Acionamento da Porta-->
+        <scene sceneID="eP9-rp-7zI">
+            <objects>
+                <viewController id="9Xj-8v-8S4" customClass="AcionamentoFemViewController" customModule="BanheiroWC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xpU-eL-naS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Acionamento da Porta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEl-lB-h7Z">
+                                <rect key="frame" x="54" y="78" width="266" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKm-8q-S1V">
+                                <rect key="frame" x="67" y="279" width="241" height="109"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.93516707480000005" green="0.59032396119999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <state key="normal" title="Abrir Porta">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="AcionamentoPorta:" destination="qVW-uv-rrd" eventType="touchUpInside" id="qmN-Pj-EgV"/>
+                                    <action selector="AcionarPorta:" destination="9Xj-8v-8S4" eventType="touchUpInside" id="upE-WV-fyE"/>
+                                    <action selector="AcionarPorta:" destination="ukF-Y8-fs2" eventType="touchUpInside" id="yk2-7h-SvW"/>
+                                    <action selector="loginButton:" destination="v2c-Md-tUM" eventType="touchUpInside" id="qjD-Qi-b8g"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ad-HI-3bk">
+                                <rect key="frame" x="195" y="595" width="133" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Sair">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="Sair:" destination="qVW-uv-rrd" eventType="touchUpInside" id="Ali-iC-e80"/>
+                                    <action selector="SairLogin:" destination="9Xj-8v-8S4" eventType="touchUpInside" id="4iv-8e-OT9"/>
+                                    <action selector="SairLogin:" destination="ukF-Y8-fs2" eventType="touchUpInside" id="zJs-Or-Gw7"/>
+                                    <segue destination="uhc-EQ-dZ5" kind="presentation" identifier="sairLoginFem" id="xTm-W7-SBn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Rx-kW-qZD">
+                                <rect key="frame" x="54" y="595" width="133" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Ajuda">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="nHc-iP-du8" kind="show" id="Tm1-dN-KWy"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.49408316612243652" green="0.49414330720901489" blue="0.49405616521835327" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="Drc-cQ-Wfj"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Acionamento da Porta" id="Wqq-D0-exB"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HhM-uM-TpY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5679" y="681"/>
+        </scene>
+        <!--Ajuda Login Fem View Controller-->
+        <scene sceneID="M4R-0N-0op">
+            <objects>
+                <viewController id="nHc-iP-du8" customClass="AjudaLoginFemViewController" customModule="BanheiroWC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ntm-FB-L9c">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.49408316612243652" green="0.49414330720901489" blue="0.49405616521835327" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="Hys-I8-fqR"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zMg-nA-xYJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7342" y="681"/>
         </scene>
         <!--Ajuda Login View Controller-->
         <scene sceneID="KNw-Xe-7MS">
@@ -240,7 +321,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n4Z-RI-qye" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4916" y="-293"/>
+            <point key="canvasLocation" x="6929" y="-1012"/>
         </scene>
         <!--Ajuda-->
         <scene sceneID="KB5-iZ-q4y">
@@ -264,7 +345,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YVp-AF-Ayi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1644" y="560.86956521739137"/>
+            <point key="canvasLocation" x="478" y="1218"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PuD-ba-G1M">
@@ -285,25 +366,46 @@
             <point key="canvasLocation" x="-534" y="118"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="GQ1-rN-6XC">
+        <scene sceneID="2eG-bX-hFk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cF0-cO-Ax2" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pm1-rU-ykM" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Xgz-Ne-0qL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qny-Gz-4Tc">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ukF-Y8-fs2" kind="relationship" relationship="rootViewController" id="5M6-DR-1cw"/>
+                        <segue destination="ukF-Y8-fs2" kind="relationship" relationship="rootViewController" id="h2e-go-tNQ"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ar1-bm-AAM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wSr-Yd-HcJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2676" y="-291"/>
+            <point key="canvasLocation" x="4164" y="-1012"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="HRr-XM-jmJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4LC-1f-G1j" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VW4-Vr-Ff8">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9Xj-8v-8S4" kind="relationship" relationship="rootViewController" id="FeG-kw-i50"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wRf-e1-L6p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4273" y="682"/>
         </scene>
     </scenes>
     <resources>
         <image name="logoWC_2.png" width="512" height="512"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Sy3-SV-9pN"/>
+    </inferredMetricsTieBreakers>
 </document>

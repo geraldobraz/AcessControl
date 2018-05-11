@@ -1,38 +1,34 @@
 //
-//  AcionamentoViewController.swift
+//  AcionamentoFemViewController.swift
 //  BanheiroWC
 //
-//  Created by Geraldo Neto on 31/01/18.
+//  Created by Geraldo Neto on 11/05/18.
 //  Copyright © 2018 Geraldo Neto. All rights reserved.
 //
-
 
 import UIKit
 import CocoaMQTT
 
-class AcionamentoViewController: UIViewController {
-    var resposta: String = ""
-    var aux: String!
-    let mqttClient = CocoaMQTT(clientID: "iOS Device", host:"192.168.1.2", port: 5050)
+
+class AcionamentoFemViewController: UIViewController {
+
+   let mqttClient = CocoaMQTT(clientID: "iOS Device", host:"192.168.1.2", port: 5050)
     
     
-    // Sair do Login
     @IBAction func SairLogin(_ sender: Any) {
-        //exibirMensagem(titulo: "Deseja sair?", mensagem: "")
-        self.performSegue(withIdentifier: "sairloginMasc", sender: nil)
-        
+        self.performSegue(withIdentifier: "sairLoginFem", sender: nil)
     }
-    // Acionar a Porta
-    @IBAction func AcionarPorta(_ sender: Any) {
     
-//        resposta = "_ON"
+    
+    @IBAction func AcionarPorta(_ sender: Any) {
         mqttClient.subscribe("celular/porta")
-        mqttClient.publish("celular/porta", withString: "MASC")
+        mqttClient.publish("celular/porta", withString: "FEM")
     }
     
     override func viewDidLoad() {
         mqttClient.connect()
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
     }
 
@@ -40,10 +36,10 @@ class AcionamentoViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
-
     /*
     // MARK: - Navigation
 

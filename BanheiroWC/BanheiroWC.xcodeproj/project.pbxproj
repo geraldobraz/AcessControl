@@ -10,6 +10,8 @@
 		C160032C20222E7E00B68F74 /* EntrarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C160032B20222E7E00B68F74 /* EntrarViewController.swift */; };
 		C16003302022442300B68F74 /* AcionamentoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C160032F2022442300B68F74 /* AcionamentoViewController.swift */; };
 		C160033220224A6500B68F74 /* AjudaLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C160033120224A6500B68F74 /* AjudaLoginViewController.swift */; };
+		C180955520A62CDF004B07ED /* AcionamentoFemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C180955420A62CDF004B07ED /* AcionamentoFemViewController.swift */; };
+		C180955720A64060004B07ED /* AjudaLoginFemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C180955620A64060004B07ED /* AjudaLoginFemViewController.swift */; };
 		C19D1358207D74A700045BBF /* logoWC_2.png in Resources */ = {isa = PBXBuildFile; fileRef = C19D1353207D74A700045BBF /* logoWC_2.png */; };
 		C19D1359207D74A700045BBF /* logoWC_1.png in Resources */ = {isa = PBXBuildFile; fileRef = C19D1354207D74A700045BBF /* logoWC_1.png */; };
 		C19D135A207D74A700045BBF /* logoWC_4.png in Resources */ = {isa = PBXBuildFile; fileRef = C19D1355207D74A700045BBF /* logoWC_4.png */; };
@@ -32,6 +34,8 @@
 		C160032B20222E7E00B68F74 /* EntrarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrarViewController.swift; sourceTree = "<group>"; };
 		C160032F2022442300B68F74 /* AcionamentoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcionamentoViewController.swift; sourceTree = "<group>"; };
 		C160033120224A6500B68F74 /* AjudaLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjudaLoginViewController.swift; sourceTree = "<group>"; };
+		C180955420A62CDF004B07ED /* AcionamentoFemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcionamentoFemViewController.swift; sourceTree = "<group>"; };
+		C180955620A64060004B07ED /* AjudaLoginFemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjudaLoginFemViewController.swift; sourceTree = "<group>"; };
 		C19D1353207D74A700045BBF /* logoWC_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoWC_2.png; sourceTree = "<group>"; };
 		C19D1354207D74A700045BBF /* logoWC_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoWC_1.png; sourceTree = "<group>"; };
 		C19D1355207D74A700045BBF /* logoWC_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoWC_4.png; sourceTree = "<group>"; };
@@ -120,7 +124,9 @@
 				C1D4C8362022256B007770C0 /* ViewController.swift */,
 				C160032B20222E7E00B68F74 /* EntrarViewController.swift */,
 				C160032F2022442300B68F74 /* AcionamentoViewController.swift */,
+				C180955420A62CDF004B07ED /* AcionamentoFemViewController.swift */,
 				C160033120224A6500B68F74 /* AjudaLoginViewController.swift */,
+				C180955620A64060004B07ED /* AjudaLoginFemViewController.swift */,
 				C1C651592029180A00322B6D /* AjudaViewController.swift */,
 				C1D4C83D2022256B007770C0 /* LaunchScreen.storyboard */,
 				C1D4C8402022256B007770C0 /* Info.plist */,
@@ -269,8 +275,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C180955520A62CDF004B07ED /* AcionamentoFemViewController.swift in Sources */,
 				C1D4C8372022256B007770C0 /* ViewController.swift in Sources */,
 				C160033220224A6500B68F74 /* AjudaLoginViewController.swift in Sources */,
+				C180955720A64060004B07ED /* AjudaLoginFemViewController.swift in Sources */,
 				C16003302022442300B68F74 /* AcionamentoViewController.swift in Sources */,
 				C1D4C8352022256B007770C0 /* AppDelegate.swift in Sources */,
 				C1C6515A2029180A00322B6D /* AjudaViewController.swift in Sources */,
