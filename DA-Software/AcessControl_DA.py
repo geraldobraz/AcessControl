@@ -5,7 +5,7 @@ import paho.mqtt.client as mqtt
 from pycpfcnpj import cpfcnpj
 import os
 from tkinter import messagebox
-import time
+import datetime
 
 # TODO
 '''
@@ -94,16 +94,26 @@ def on_message(client, userdata, message):
             messagebox.showwarning("Erro", "Dados Inválidos")
     # Listar todos os alunos
     if message.topic == "software/ListarTodos/validacao/Serv2Sw":
-        dados = message.payload.decode("utf-8")
-        alunos = (str(dados).split("?"))
-        alunos.pop()
-        # TODO: Colocar a data e hora no header da Lista de Alunos
         info = open("ListaAlunos.txt", "w")
         info.write("*************************************************\n############ Lista de Todos os Alunos ###########\n*************************************************\n")
-        for row in alunos:
-            # dados_alunos = row
-            dados_alunos = row.split("$")
-            info.write("Nome: "+ dados_alunos[0] +"\nCPF: " + dados_alunos[1]+ "\nSexo: " + dados_alunos[2] + "\n***********************\n")
+        info.write("Data: " + str(datetime.date.today()) + "\n")
+        info.write("------------------------------------------------\n")
+        info.write("|     NOME          |     CPF     |    SEXO     |\n")
+        info.write("------------------------------------------------\n")
+
+        dados = message.payload.decode("utf-8")
+        if dados == "":
+            info.write("\n    Banco de Dados Vazio    \n")
+        else:
+            alunos = (str(dados).split("?"))
+            alunos.pop()
+
+            for row in alunos:
+                dados_alunos = row.split("$")
+                info.write("| " + dados_alunos[0] + (18 - len(dados_alunos[0])) * " " + "| "
+                           + dados_alunos[1] + (12 - len(dados_alunos[1])) * " " + "| "
+                           + dados_alunos[2] + (12 - len(dados_alunos[2])) * " " + "|\n")
+                info.write("------------------------------------------------\n")
 
         info.close()
 
@@ -335,6 +345,7 @@ ListarTodosbutton.grid(row=5, column=0, sticky=W)
 client = mqtt.Client("Software DA")
 client.on_message = on_message
 client.connect("192.168.1.2", 5050)
+# client.connect("192.168.1.2", 5050)
 client.subscribe("software/Add/validacao/Sw2Serv")
 client.subscribe("software/Add/validacao/Serv2Sw")
 client.subscribe("software/Trocar/validacao/Serv2Sw")
