@@ -24,7 +24,7 @@ class EntrarViewController: UIViewController {
     var vaiCPF: String = ""
     let aciona = AcionamentoViewController()
     var wait: UIActivityIndicatorView = UIActivityIndicatorView()
-    let mqttClient = CocoaMQTT(clientID: "iOS Device", host:"192.168.1.2", port: 5050) // Configurações do MQTT
+    let mqttClient = CocoaMQTT(clientID: "iOS Device", host:"192.168.1.3", port: 5050) // Configurações do MQTT
     
     
     override func viewDidLoad() {
@@ -174,7 +174,7 @@ extension EntrarViewController: CocoaMQTTDelegate{
         if(message.topic == "celular/dados/resposta"){
         
             
-            if(message.string! == "Masc"){
+            if(message.string! == "Masc"){ // Masc
                 wait.stopAnimating()
                 self.performSegue(withIdentifier: "loginMasc", sender: nil) // FIXME: Colocar um segue para uma tela masc
             }

@@ -12,7 +12,7 @@ import CocoaMQTT
 
 class AcionamentoFemViewController: UIViewController {
 
-   let mqttClient = CocoaMQTT(clientID: "iOS Device", host:"192.168.1.2", port: 5050)
+   let mqttClient = CocoaMQTT(clientID: "iOS Device", host:"192.168.1.3", port: 5050)
     
     
     @IBAction func SairLogin(_ sender: Any) {
@@ -21,8 +21,8 @@ class AcionamentoFemViewController: UIViewController {
     
     
     @IBAction func AcionarPorta(_ sender: Any) {
-        mqttClient.subscribe("celular/porta")
-        mqttClient.publish("celular/porta", withString: "FEM")
+        mqttClient.subscribe("celular/porta/Fem")
+        mqttClient.publish("celular/porta/Fem", withString: "ON")
     }
     
     override func viewDidLoad() {

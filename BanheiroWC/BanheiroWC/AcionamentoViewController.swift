@@ -13,7 +13,7 @@ import CocoaMQTT
 class AcionamentoViewController: UIViewController {
     var resposta: String = ""
     var aux: String!
-    let mqttClient = CocoaMQTT(clientID: "iOS Device", host:"192.168.1.2", port: 5050)
+    let mqttClient = CocoaMQTT(clientID: "iOS Device", host:"192.168.1.3", port: 5050)
     
     
     // Sair do Login
@@ -26,8 +26,8 @@ class AcionamentoViewController: UIViewController {
     @IBAction func AcionarPorta(_ sender: Any) {
     
 //        resposta = "_ON"
-        mqttClient.subscribe("celular/porta")
-        mqttClient.publish("celular/porta", withString: "MASC")
+        mqttClient.subscribe("celular/porta/Masc") // celular/porta
+        mqttClient.publish("celular/porta/Masc", withString: "ON")
     }
     
     override func viewDidLoad() {
