@@ -65,6 +65,30 @@ def ProcuraCpf(ValorCpf):
 
     cursor.close()
     return validador_cpf
+def ProcuraGenero(ValorCpf):
+    procura_genero = ("SELECT SEXO "
+                     "FROM Alunos "
+                     "WHERE CPF = %(cpf_atual)s")
+    cursor = cnx.cursor()
+    cpf_atual = int(ValorCpf)
+    cursor.execute(procura_genero, {'cpf_atual': cpf_atual})
+    dados = []
+    for row in cursor:
+        print(row)
+        print (str(row[0]))
+        if str(row[0]) == "Masculino":
+            print (">> Masculino")
+            resposta = "Masc"
+        else:
+            print (">> Feminino")
+            resposta = "Fem"
+    
+     
+    cnx.commit()
+    cursor.close()
+    print(">> resposta: " + resposta)
+    return resposta
+
 def ProcuraAluno(ValorCpf):
     procura_dados = ("SELECT NOME,CPF,SEXO "
                      "FROM Alunos "
@@ -97,6 +121,9 @@ def ListarAlunos():
     for row in cursor:
         # DadosAluno+?+DadosAluno+?+...
         dados.append("$".join(row) + "?")
+        print(row)
+    else:
+        print("Nao entrou!")
     cursor.close()
     return "".join(dados)
 
@@ -107,16 +134,16 @@ def on_message(client, userdata, message):
     if message.topic == "celular/dados":
         print("Dados")
         dado = str(message.payload.decode("utf-8")).split("$")
+        print(dado)
         # Chamar a func que valida o cpf e a senha
 
         # if dado[0] == cpf and dado[1] == senha:
         if ProcuraCpf(dado[0]) and ProcuraSenha(dado[0],dado[1]):
-            # Resp_Env = "ok" + "%" + "Fem"
-            client.publish("celular/dados/resposta", "ok")
+            client.publish("celular/dados/resposta", ProcuraGenero(dado[0]))
         else:
             client.publish("celular/dados/resposta", "nao")
     # Abrir porta Masc
-    if message.topic == "celular/porta":
+    if message.topic == "celular/porta/Masc":
         print(">>Topic: celular/porta/Masc")
         resp = str(message.payload.decode("utf-8"))
         print(resp)
@@ -126,8 +153,8 @@ def on_message(client, userdata, message):
         if message.payload.decode("utf-8") == "ON":
             # Mandar um comando RGPIO para abrir a porta
             print("Ligou!")
-        if message.payload.decode("utf-8") == "OFF":
-            print("Desligou!")
+        else:
+            pass
     # Abrir porta Fem
     if message.topic == "celular/porta/Fem":
         print(">>Topic: celular/porta/Fem")
@@ -139,8 +166,8 @@ def on_message(client, userdata, message):
         if message.payload.decode("utf-8") == "ON":
             # Mandar um comando RGPIO para abrir a porta
             print("Ligou!")
-        if message.payload.decode("utf-8") == "OFF":
-            print("Desligou!")
+        else:
+            pass
         #------------------------
     # Adicao de Aluno
     if message.topic == "software/Add/validacao/Sw2Serv":
@@ -185,8 +212,11 @@ def on_message(client, userdata, message):
             client.publish("software/Trocar/validacao/Serv2Sw", "Nao Valido")
     # Listar Aluno Especifico
     if message.topic == "software/Procura/validacao/Sw2Serv":
+        print("1")
         dado = str(message.payload.decode("utf-8"))
+        print("2")
         if ProcuraCpf(dado):
+            print("3")
             print (type(ProcuraAluno(dado)))
             client.publish("software/Procura/validacao/Serv2Sw", "Valido$"+ ProcuraAluno(dado))
             print ("Enviou!")
@@ -210,19 +240,19 @@ def on_message(client, userdata, message):
 
 
 # Criando um cliente novo
-client = mqtt.Client("Servidor_Ubunto")
+client = mqtt.Client("Servidor_Raspberry")
 
 # Conectando ao broker
-print ("Conectando em 192.168.1.2 ...")
+print ("Conectando em 192.168.0.37 ...")
 
 client.on_message = on_message
 
 # client.connect("192.168.0.25", 5050)
-client.connect("192.168.1.2", 5050)
+client.connect("192.168.1.3", 5050)
 
 ############## CELULARES ###########
 # FIXME: Se inscrever no canal celular/porta/Masc!!!!
-client.subscribe("celular/porta")
+client.subscribe("celular/porta/Masc")
 client.subscribe("celular/porta/Fem")
 client.subscribe("celular/cpf")
 client.subscribe("celular/senha")
@@ -236,7 +266,4 @@ client.subscribe("software/Apagar/validacao/Sw2Serv")
 
 
 client.loop_forever()
-
-
-
 
