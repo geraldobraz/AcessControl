@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">AndroidApp</string>
+
+    <!-- Open Activity -->
+    <string name="open_screen_title">Tela principal</string>
+
+    <!-- Login Activity -->
+    <string name="login_screen_title">Entrar</string>
+    <string name="wrong_password">Senha incorreta</string>
+    <string name="cpg_field">CPF</string>
+    <string name="password_field">Senha</string>
+    <string name="login_button">Login</string>
+</resources>
