@@ -8,30 +8,83 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
+import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-
-import helpers.MQTTHelper;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText cpfField;
     private EditText passwordField;
 
-    private MQTTHelper mqttHelper;
+    final static String serverUri = "tcp://192.168.1.2:5050";
+    final static String clientId = "Android Device";
+    final String subscriptionTopic = "celular/dados";
+    final String responseTopic = "celular/dados/resposta";
+
+    final static String GENDER_IDENTIFIER = "gender_identifier";
+    final static String GENDER_MASC = "Masc";
+    final static String GENDER_FEM = "Fem";
+    final String USER_NOT_FOUND = "nao";
+
+    private MqttAndroidClient mqttClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // barra do titulo
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
 
             getSupportActionBar().setTitle(getString(R.string.login_screen_title));
         }
+
+        // MQTT
+        mqttClient = new MqttAndroidClient(getApplicationContext(), serverUri, clientId);
+        try {
+            mqttClient.connect();
+        } catch (MqttException ex) {
+            ex.printStackTrace();
+        }
+        mqttClient.setCallback(new MqttCallbackExtended() {
+            @Override
+            public void connectComplete(boolean reconnect, String serverURI) {
+
+            }
+
+            @Override
+            public void connectionLost(Throwable cause) {
+
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                if (topic.equals(responseTopic)) {
+                    if (message.toString().equals(GENDER_MASC)) {
+                        Intent intent = new Intent(LoginActivity.this, OpenActivity.class);
+                        intent.putExtra(GENDER_IDENTIFIER, GENDER_MASC);
+                        startActivity(intent);
+                    } else if (message.toString().equals(GENDER_FEM)) {
+                        Intent intent = new Intent(LoginActivity.this, OpenActivity.class);
+                        intent.putExtra(GENDER_IDENTIFIER, GENDER_FEM);
+                        startActivity(intent);
+                    } else if (message.toString().equals(USER_NOT_FOUND)) {
+                        passwordField.setError(getString(R.string.wrong_password));
+                        passwordField.requestFocus();
+                    }
+                }
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+
+            }
+        });
 
         cpfField = (EditText) findViewById(R.id.cpf_field);
         passwordField = (EditText) findViewById(R.id.password_field);
@@ -43,18 +96,19 @@ public class LoginActivity extends AppCompatActivity {
                 String cpf = cpfField.getText().toString();
                 String senha = passwordField.getText().toString();
 
-                Log.d("LOGIN", "cpf: " + cpf);
-                Log.d("LOGIN", "senha: " + senha);
-
                 //chamar mqtt para verificar se o usuario está cadastrado
-                startMqtt();
-
-                if (cpf.equals("10121975495") && senha.equals("1234")) {
-                    Intent intent = new Intent(LoginActivity.this, OpenActivity.class);
-                    startActivity(intent);
-                } else {
-                    passwordField.setError(getString(R.string.wrong_password));
-                    passwordField.requestFocus();
+                try {
+                    mqttClient.subscribe(subscriptionTopic, 0);
+                    mqttClient.subscribe(responseTopic, 0);
+                } catch (MqttException ex) {
+                    ex.printStackTrace();
+                }
+                String nome = cpf + "$" + senha;
+                MqttMessage mqttMessage = new MqttMessage(nome.getBytes());
+                try {
+                    mqttClient.publish(subscriptionTopic, mqttMessage);
+                } catch (MqttException ex) {
+                    ex.printStackTrace();
                 }
             }
         });
@@ -67,29 +121,5 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    private void startMqtt(){
-        mqttHelper = new MQTTHelper(getApplicationContext());
-        mqttHelper.mqttAndroidClient.setCallback(new MqttCallbackExtended() {
-            @Override
-            public void connectComplete(boolean b, String s) {
-                Log.w("Debug","Connected");
-            }
-
-            @Override
-            public void connectionLost(Throwable throwable) {
-
-            }
-
-            @Override
-            public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-                Log.w("Debug",mqttMessage.toString());
-            }
-
-            @Override
-            public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
-
-            }
-        });
-    }
 }
 
