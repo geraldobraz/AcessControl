@@ -1,11 +1,8 @@
 # AccessControl
-Projeto de um Controle de Acesso envolvendo Internet das Coisas para o meu Trabalho de Conclusão de Curso
 
-Este é o meu trabalho de Conclusão de Curso em Engenharia de Controle e Automação, CTG-UFPE.
+#### This project is part of my final paper of my graduation in Control and Automation Engineer at Federal University of Pernambuco.   
 
-Este trabalho tem como objetivo principal implantar um controle de acesso utilizando o conceito de IoT (Internet of Things) e 
-além disso busca mostrar como é facil implementar soluções que envolvem IoT utilizando o protocolo de comunicação MQTT.
-O trabalho consiste em um servidor, uma aplicação para que possa se gerenciar o controle de acesso ambos implementados em Python e 
-dois aplicativos mobile um para dispositovos iOS e outro para dispositivos Android.
 
-                                      ----- Trabalho ainda em construção ----------
+This project aims to implement an access control using **IoT** (Internet of Things) and try to show how easy and simple is build Iot solutions with the MQTT comunication protocol. This project has a [Server](https://github.com/geraldobraz/access-control/tree/master/Server), an application software that [manage the access control](https://github.com/geraldobraz/access-control/tree/master/DA-Software) and 2 mobile applications one using [Android](https://github.com/geraldobraz/access-control/tree/master/AndroidApp) and another using [Swift](https://github.com/geraldobraz/access-control/tree/master/BanheiroWC). 
+
+                            
