@@ -3,7 +3,6 @@ package com.example.geraldobraz.androidapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,15 +18,18 @@ public class LoginActivity extends AppCompatActivity {
     private EditText cpfField;
     private EditText passwordField;
 
+
     final static String serverUri = "tcp://192.168.1.2:5050";
     final static String clientId = "Android Device";
-    final String subscriptionTopic = "celular/dados";
-    final String responseTopic = "celular/dados/resposta";
+    final String dataTopic = "celular/dados";
+    final String responseDataTopic = "celular/dados/resposta";
+
 
     final static String GENDER_IDENTIFIER = "gender_identifier";
     final static String GENDER_MASC = "Masc";
     final static String GENDER_FEM = "Fem";
     final String USER_NOT_FOUND = "nao";
+
 
     private MqttAndroidClient mqttClient;
 
@@ -36,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // barra do titulo
+        // Title
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -44,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(getString(R.string.login_screen_title));
         }
 
-        // MQTT
+        // MQTT config
         mqttClient = new MqttAndroidClient(getApplicationContext(), serverUri, clientId);
         try {
             mqttClient.connect();
@@ -64,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
-                if (topic.equals(responseTopic)) {
+                if (topic.equals(responseDataTopic)) {
                     if (message.toString().equals(GENDER_MASC)) {
                         Intent intent = new Intent(LoginActivity.this, OpenActivity.class);
                         intent.putExtra(GENDER_IDENTIFIER, GENDER_MASC);
@@ -94,19 +96,19 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String cpf = cpfField.getText().toString();
-                String senha = passwordField.getText().toString();
+                String password = passwordField.getText().toString();
 
-                //chamar mqtt para verificar se o usuario está cadastrado
+                //Sending the data from user to the server
                 try {
-                    mqttClient.subscribe(subscriptionTopic, 0);
-                    mqttClient.subscribe(responseTopic, 0);
+                    mqttClient.subscribe(dataTopic, 0);
+                    mqttClient.subscribe(responseDataTopic, 0);
                 } catch (MqttException ex) {
                     ex.printStackTrace();
                 }
-                String nome = cpf + "$" + senha;
-                MqttMessage mqttMessage = new MqttMessage(nome.getBytes());
+                String data = cpf + "$" + password;
+                MqttMessage mqttMessage = new MqttMessage(data.getBytes());
                 try {
-                    mqttClient.publish(subscriptionTopic, mqttMessage);
+                    mqttClient.publish(dataTopic, mqttMessage);
                 } catch (MqttException ex) {
                     ex.printStackTrace();
                 }

@@ -14,10 +14,10 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class OpenActivity extends AppCompatActivity {
 
-    final String responseTopic = "celular/dados/resposta";
-    final String genderMasTopic = "celular/banheiro/masc";
-    final String genderFemTopic = "celular/banheiro/fem";
+    final String mascDoorTopic = "celular/porta/Masc";
+    final String femDoorTopic = "celular/porta/Fem";
 
+    final String ON = "ON";
     private MqttAndroidClient mqttClient;
 
     @Override
@@ -33,7 +33,7 @@ public class OpenActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final String gender = intent.getStringExtra(LoginActivity.GENDER_IDENTIFIER);
 
-        // MQTT
+        // MQTT config
         mqttClient = new MqttAndroidClient(getApplicationContext(), LoginActivity.serverUri, LoginActivity.clientId);
         try {
             mqttClient.connect();
@@ -53,9 +53,7 @@ public class OpenActivity extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
-                if (topic.equals(responseTopic)) {
 
-                }
             }
 
             @Override
@@ -69,17 +67,17 @@ public class OpenActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    mqttClient.subscribe(genderFemTopic, 0);
-                    mqttClient.subscribe(genderMasTopic, 0);
+                    mqttClient.subscribe(femDoorTopic, 0);
+                    mqttClient.subscribe(mascDoorTopic, 0);
                 } catch (MqttException ex) {
                     ex.printStackTrace();
                 }
-                MqttMessage mqttMessage = new MqttMessage(gender.getBytes());
+                MqttMessage mqttMessage = new MqttMessage(ON.getBytes());
                 try {
                     if (gender.equals(LoginActivity.GENDER_MASC)) {
-                        mqttClient.publish(genderMasTopic, mqttMessage);
+                        mqttClient.publish(mascDoorTopic, mqttMessage);
                     } else if (gender.equals(LoginActivity.GENDER_FEM)) {
-                        mqttClient.publish(genderFemTopic, mqttMessage);
+                        mqttClient.publish(femDoorTopic, mqttMessage);
                     }
 
                 } catch (MqttException ex) {
