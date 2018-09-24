@@ -4,33 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroud"
     tools:context="com.example.geraldobraz.androidapp.OpenActivity">
 
     <Button
-        android:id="@+id/open_btn"
+        android:id="@+id/open_door_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Abrir"
+        android:text="@string/open_door_button"
+        android:textSize="17sp"
+        android:background="@color/button1"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:paddingHorizontal="60dp"
+        android:paddingVertical="30dp"
+        android:textAllCaps="false"/>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/leave_btn"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true">
-
-        <Button
-            android:id="@+id/leave_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sair"/>
-
-        <Button
-            android:id="@+id/ajuda2_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ajuda"/>
-    </LinearLayout>
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="@string/leave_button"
+        android:textAllCaps="false"
+        android:background="@color/button2"/>
 
 </RelativeLayout>

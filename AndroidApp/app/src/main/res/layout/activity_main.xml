@@ -2,23 +2,39 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroud"
     tools:context="com.example.geraldobraz.androidapp.MainActivity">
 
-    <Button
-        android:id="@+id/entrar_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/ajuda_btn"
-        android:text="Entrar"/>
+    <ImageView
+        android:id="@+id/main_image"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/app_icon"/>
 
     <Button
-        android:id="@+id/ajuda_btn"
+        android:id="@+id/enter_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="Ajuda"/>
+        android:layout_below="@+id/main_image"
+        android:layout_marginHorizontal="80dp"
+        android:background="@color/button1"
+        android:text="@string/enter_button"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/help_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/enter_btn"
+        android:layout_marginHorizontal="80dp"
+        android:layout_marginVertical="10dp"
+        android:background="@color/button2"
+        android:text="@string/help_button"
+        android:textAllCaps="false"/>
 
 </RelativeLayout>

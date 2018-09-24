@@ -1,12 +1,18 @@
 <resources>
     <string name="app_name">AndroidApp</string>
 
+    <!-- Main Activity -->
+    <string name="enter_button">Entrar</string>
+    <string name="help_button">Ajuda</string>
+
     <!-- Open Activity -->
     <string name="open_screen_title">Tela principal</string>
+    <string name="open_door_button">Abrir Porta</string>
+    <string name="leave_button">Sair</string>
 
     <!-- Login Activity -->
     <string name="login_screen_title">Entrar</string>
-    <string name="wrong_password">Senha incorreta</string>
+    <string name="login_error">CPF ou senha incorretos</string>
     <string name="cpg_field">CPF</string>
     <string name="password_field">Senha</string>
     <string name="login_button">Login</string>

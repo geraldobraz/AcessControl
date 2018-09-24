@@ -62,7 +62,7 @@ public class OpenActivity extends AppCompatActivity {
             }
         });
 
-        Button openBtn = (Button) findViewById(R.id.open_btn);
+        Button openBtn = (Button) findViewById(R.id.open_door_btn);
         openBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,15 +94,5 @@ public class OpenActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        Button ajudaBtn = (Button) findViewById(R.id.ajuda2_btn);
-        ajudaBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OpenActivity.this, HelpActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 }

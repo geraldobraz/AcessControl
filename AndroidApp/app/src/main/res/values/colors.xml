@@ -3,8 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
 
-    <!-- Open Activity -->
+    <color name="actionBarDark">#005368</color>
+    <color name="actionBar">#006C84</color>
 
-    <!-- Login Activity -->
+    <color name="backgroud">#DDDDD0</color>
+    <color name="button1">#6EB5C0</color>
+    <color name="button2">#FA8D62</color>
+    <color name="button3">#688D8A</color>
+
 </resources>

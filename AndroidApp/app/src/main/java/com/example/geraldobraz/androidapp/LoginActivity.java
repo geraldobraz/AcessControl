@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra(GENDER_IDENTIFIER, GENDER_FEM);
                         startActivity(intent);
                     } else if (message.toString().equals(USER_NOT_FOUND)) {
-                        passwordField.setError(getString(R.string.wrong_password));
+                        passwordField.setError(getString(R.string.login_error));
                         passwordField.requestFocus();
                     }
                 }

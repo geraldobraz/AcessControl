@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroud"
     tools:context="com.example.geraldobraz.androidapp.LoginActivity">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/cpf_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true">
+        android:layout_marginTop="130dp"
+        android:layout_marginHorizontal="80dp">
 
         <EditText
             android:id="@+id/cpf_field"
@@ -26,6 +28,7 @@
         android:id="@+id/password_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="80dp"
         android:layout_below="@id/cpf_container">
 
         <EditText
@@ -40,10 +43,15 @@
 
     <Button
         android:id="@+id/login_btn"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:text="@string/login_button"
-        android:layout_alignParentBottom="true"/>
+        android:background="@color/button1"
+        android:paddingHorizontal="60dp"
+        android:paddingVertical="20dp"
+        android:layout_centerHorizontal="true"
+        android:textAllCaps="false"
+        android:layout_below="@+id/password_container"/>
 
 </RelativeLayout>
