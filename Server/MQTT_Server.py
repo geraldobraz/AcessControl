@@ -1,183 +1,149 @@
 ######################################################################
-#                            Servidor                                #
+#                              Server                                #
 ######################################################################
-
 
 import paho.mqtt.client as mqtt
 from pycpfcnpj import cpfcnpj
 import mysql.connector
-# FIXME: ADD a parte do BD
 import time
 
 cnx = mysql.connector.connect(user='root', password='senha',
                               host='localhost',
                               database='Controle_de_Acesso')
 
-# Funcoes MySQL
-
+# MySQL Functions
 add_Alunos = ("INSERT INTO Alunos "
                "(NOME,CPF,SEXO,SENHA) "
                "VALUES (%s, %s, %s, %s)")
 
 update_senha = ("UPDATE Alunos SET SENHA = %s"
-              "WHERE CPF = %s")
+                "WHERE CPF = %s")
 
-# Funcoes######
+select_password  =   ("SELECT SENHA"
+                    " FROM Alunos"
+                    " WHERE CPF = %(cpf_atual)s")
 
-def ProcuraSenha(ValorCpf, ValorSenha):
-    validador_senha = False
-    query = ("SELECT SENHA"
-             " FROM Alunos"
-             " WHERE CPF = %(cpf_atual)s")
+select_cpf = ("SELECT CPF FROM Alunos ")
 
+select_gender = ("SELECT SEXO "
+                "FROM Alunos "
+                "WHERE CPF = %(cpf_atual)s")
+
+select_data = ("SELECT NOME,CPF,SEXO "
+                "FROM Alunos "
+                "WHERE CPF = %(cpf_atual)s")
+
+delete_user = ("DELETE FROM Alunos "
+                "WHERE CPF = %(cpf_atual)s")
+
+list_users = ("SELECT NOME, CPF, SEXO FROM Alunos ORDER BY NOME")
+
+
+# Functions 
+def searchPassword(Cpf, password):
+    passwordAuth = False
     cursor = cnx.cursor()
-    cpf_atual = int(ValorCpf)
-    cursor.execute(query, {'cpf_atual': cpf_atual})
-    # print (cursor)
-    # data = cursor.fetchall()
+    cpf_atual = int(Cpf)
+    cursor.execute(select_password, {'cpf_atual': cpf_atual})
 
     for row in cursor:
-        print(row)
-        print (str(row[0]))
-        if str(row[0]) == ValorSenha:
-            print ("Senha OK")
-            validador_senha = True
+        if str(row[0]) == password:
+            passwordAuth = True
         else:
             pass
-            # validador_senha = False
     cursor.close()
-    return validador_senha
-def ProcuraCpf(ValorCpf):
+    return passwordAuth
+def searchCpf(Cpf):
+    cpfAuth = False
     cursor = cnx.cursor()
-    query = ("SELECT CPF FROM Alunos ")
-
-    cursor.execute(query)
-
-    validador_cpf = False
+    cursor.execute(select_cpf)
     for row in cursor:
-        if (ValorCpf in row):
-            print (row)
-            print ("Cpf existe e esta no banco")
-            validador_cpf = True
+        if (Cpf in row):
+            cpfAuth = True
         else:
-            print (row)
-            print ("Cpf nao eh esse")
-
+            pass
     cursor.close()
-    return validador_cpf
-def ProcuraGenero(ValorCpf):
-    procura_genero = ("SELECT SEXO "
-                     "FROM Alunos "
-                     "WHERE CPF = %(cpf_atual)s")
+    return cpfAuth
+def searchGender(Cpf):
+    
     cursor = cnx.cursor()
-    cpf_atual = int(ValorCpf)
-    cursor.execute(procura_genero, {'cpf_atual': cpf_atual})
-    dados = []
+    cpf_atual = int(Cpf)
+    cursor.execute(select_gender, {'cpf_atual': cpf_atual})
     for row in cursor:
-        print(row)
-        print (str(row[0]))
+        # FIXME: Search about use ifs in one line
         if str(row[0]) == "Masculino":
-            print (">> Masculino")
             resposta = "Masc"
         else:
-            print (">> Feminino")
             resposta = "Fem"
-    
-     
     cnx.commit()
     cursor.close()
-    print(">> resposta: " + resposta)
     return resposta
-
-def ProcuraAluno(ValorCpf):
-    procura_dados = ("SELECT NOME,CPF,SEXO "
-                     "FROM Alunos "
-                     "WHERE CPF = %(cpf_atual)s")
+def searchStudent(Cpf):
     cursor = cnx.cursor()
-    cpf_atual = int(ValorCpf)
-    cursor.execute(procura_dados, {'cpf_atual': cpf_atual})
-    dados = []
+    cpf_atual = int(Cpf)
+    cursor.execute(select_data, {'cpf_atual': cpf_atual})
+    data = []
     for row in cursor:
-        dados = ([row[i] for i in range(0,len(row))])
-    dados ="$".join(dados)
+        data = ([row[i] for i in range(0,len(row))])
+    data ="$".join(data)
     cnx.commit()
     cursor.close()
-    return dados
-def ApagarAluno(ValorCpf):
-    apagar_aluno = ("DELETE FROM Alunos "
-                         "WHERE CPF = %(cpf_atual)s")
+    return data
+def deleteStudent(Cpf):  
     cursor = cnx.cursor()
-    cpf_atual = int(ValorCpf)
-    cursor.execute(apagar_aluno, {'cpf_atual': cpf_atual})
+    cpf_atual = int(Cpf)
+    cursor.execute(delete_user, {'cpf_atual': cpf_atual})
     cnx.commit()
     cursor.close()
-    print ("Apagou o Aluno: ", ValorCpf)
-def ListarAlunos():
-    listar_alunos = ("SELECT NOME, CPF, SEXO FROM Alunos ORDER BY NOME")
+def listStudents():
     cursor = cnx.cursor()
-    cursor.execute(listar_alunos)
-    dados = []
-    # FIXME: Tratar tabelas vazias!
+    cursor.execute(list_users)
+    data = []
     for row in cursor:
-        # DadosAluno+?+DadosAluno+?+...
-        dados.append("$".join(row) + "?")
-        print(row)
+        data.append("$".join(row) + "?")
     else:
-        print("Nao entrou!")
+        pass
     cursor.close()
-    return "".join(dados)
+    return "".join(data)
 
 def on_message(client, userdata, message):
     print ("Message received: " + str(message.payload.decode("utf-8")))
     print ("Topic: " + str (message.topic) )
-    # Receber os dados do celular
+    
+    # Receiving data from cellphones
     if message.topic == "celular/dados":
-        print("Dados")
-        dado = str(message.payload.decode("utf-8")).split("$")
-        print(dado)
-        # Chamar a func que valida o cpf e a senha
-
-        # if dado[0] == cpf and dado[1] == senha:
-        if ProcuraCpf(dado[0]) and ProcuraSenha(dado[0],dado[1]):
-            client.publish("celular/dados/resposta", ProcuraGenero(dado[0]))
+        data = str(message.payload.decode("utf-8")).split("$")
+        if searchCpf(data[0]) and searchPassword(data[0],data[1]):
+            client.publish("celular/dados/resposta", searchGender(data[0]))
         else:
             client.publish("celular/dados/resposta", "nao")
-    # Abrir porta Masc
+    # Open the masculine door
     if message.topic == "celular/porta/Masc":
         print(">>Topic: celular/porta/Masc")
         resp = str(message.payload.decode("utf-8"))
-        print(resp)
-
-        # Buscar no BD so sexo relacionado com o cpf indicado
-        #------------------------
         if message.payload.decode("utf-8") == "ON":
-            # Mandar um comando RGPIO para abrir a porta
-            print("Ligou!")
+            # TODO: Configurate the Raspberry I/Os
+            print("Open!")
         else:
             pass
-    # Abrir porta Fem
+    #  Open the feminine door
     if message.topic == "celular/porta/Fem":
         print(">>Topic: celular/porta/Fem")
         resp = str(message.payload.decode("utf-8"))
-        print(resp)
-
-        # Buscar no BD so sexo relacionado com o cpf indicado
-        # ------------------------
         if message.payload.decode("utf-8") == "ON":
             # Mandar um comando RGPIO para abrir a porta
-            print("Ligou!")
+            print("Open!")
         else:
             pass
-        #------------------------
-    # Adicao de Aluno
+    # Adding Student
     if message.topic == "software/Add/validacao/Sw2Serv":
         print("Dados")
-        dado = str(message.payload.decode("utf-8")).split("%")
-        print (dado[1])
+        data = str(message.payload.decode("utf-8")).split("%")
+        print (data[1])
         #dado[0]: Nome #dado[1]: CPF #dado[2]: Sexo #dado[3]: Senha
-        if not ProcuraCpf(dado[1]):
+        if not searchCpf(data[1]):
             print ("Cpf Nao existe no BD :)")
-            data_Alunos = (dado[0],dado[1],dado[2],dado[3])
+            data_Alunos = (data[0],data[1],data[2],data[3])
             cursor = cnx.cursor()
             cursor.execute(add_Alunos, data_Alunos)
             cnx.commit()
@@ -189,15 +155,15 @@ def on_message(client, userdata, message):
         else:
             print ("CPF existe no Banco")
             client.publish("software/Add/validacao/Serv2Sw", "Nao Valido")
-    # Trocar Senha
+    # Changing Password
     if message.topic == "software/Trocar/validacao/Sw2Serv":
         print("Dados")
-        dado = str(message.payload.decode("utf-8")).split("%")
-        print (dado[0],dado[1])
+        data = str(message.payload.decode("utf-8")).split("%")
+        print (data[0],data[1])
         #dado[0]: CPF #dado[1]: Nova Senha
-        if ProcuraCpf(dado[0]):
+        if searchCpf(data[0]):
             print ("CPF encontrado)")
-            data_Alunos = (dado[1],dado[0])
+            data_Alunos = (data[1],data[0])
             cursor = cnx.cursor()
             cursor.execute(update_senha, data_Alunos)
 
@@ -210,48 +176,43 @@ def on_message(client, userdata, message):
         else:
             print ("CPF existe no Banco")
             client.publish("software/Trocar/validacao/Serv2Sw", "Nao Valido")
-    # Listar Aluno Especifico
+    # Listing an Especific Student
     if message.topic == "software/Procura/validacao/Sw2Serv":
         print("1")
-        dado = str(message.payload.decode("utf-8"))
+        data = str(message.payload.decode("utf-8"))
         print("2")
-        if ProcuraCpf(dado):
+        if searchCpf(data):
             print("3")
-            print (type(ProcuraAluno(dado)))
-            client.publish("software/Procura/validacao/Serv2Sw", "Valido$"+ ProcuraAluno(dado))
+            print (type(searchStudent(data)))
+            client.publish("software/Procura/validacao/Serv2Sw", "Valido$"+ searchStudent(data))
             print ("Enviou!")
         else:
-            client.publish("software/Procura/validacao/Serv2Sw", "Nao Valido$" + ProcuraAluno(dado))
-    # Apagar Aluno
+            client.publish("software/Procura/validacao/Serv2Sw", "Nao Valido$" + searchStudent(data))
+    # Deleting Student
     if message.topic == "software/Apagar/validacao/Sw2Serv":
-        dado = str(message.payload.decode("utf-8"))
-        if ProcuraCpf(dado):
-            ApagarAluno(dado)
+        data = str(message.payload.decode("utf-8"))
+        if searchCpf(data):
+            deleteStudent(data)
             client.publish("software/Apagar/validacao/Serv2Sw", "Valido")
             # print ("Enviou!")
         else:
             client.publish("software/Apagar/validacao/Serv2Sw", "Nao Valido")
-    # Listar todos os Alunos
+    # List All Students
     if message.topic == "software/ListarTodos/validacao/Sw2Serv":
-        dado = str(message.payload.decode("utf-8"))
-        if dado == "Listar":
-            client.publish("software/ListarTodos/validacao/Serv2Sw", ListarAlunos())
-            print ("Enviou!",ListarAlunos())
+        data = str(message.payload.decode("utf-8"))
+        if data == "Listar":
+            client.publish("software/ListarTodos/validacao/Serv2Sw", listStudents())
+            print ("Enviou!",listStudents())
 
 
-# Criando um cliente novo
+# Creating a new MQTT client
 client = mqtt.Client("Servidor_Raspberry")
-
-# Conectando ao broker
-print ("Conectando em 192.168.0.37 ...")
 
 client.on_message = on_message
 
 # client.connect("192.168.0.25", 5050)
 client.connect("192.168.1.3", 5050)
 
-############## CELULARES ###########
-# FIXME: Se inscrever no canal celular/porta/Masc!!!!
 client.subscribe("celular/porta/Masc")
 client.subscribe("celular/porta/Fem")
 client.subscribe("celular/cpf")
