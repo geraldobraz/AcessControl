@@ -143,8 +143,8 @@
                         <viewLayoutGuide key="safeArea" id="g1M-i3-sIQ"/>
                     </view>
                     <connections>
-                        <outlet property="cpfUsuario" destination="Yqn-Je-xN6" id="guw-2z-3Uj"/>
-                        <outlet property="senhaUsuario" destination="t1G-Qz-vdU" id="rlN-Xv-FWn"/>
+                        <outlet property="userCPF" destination="Yqn-Je-xN6" id="guw-2z-3Uj"/>
+                        <outlet property="userPassword" destination="t1G-Qz-vdU" id="rlN-Xv-FWn"/>
                         <segue destination="pm1-rU-ykM" kind="presentation" identifier="loginMasc" id="Xj5-Za-ul2"/>
                         <segue destination="4LC-1f-G1j" kind="presentation" identifier="loginFem" id="QMA-ao-YSK"/>
                     </connections>
