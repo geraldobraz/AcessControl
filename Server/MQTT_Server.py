@@ -7,6 +7,7 @@ from pycpfcnpj import cpfcnpj
 import mysql.connector
 import time
 
+# Data Base Configuration
 cnx = mysql.connector.connect(user='root', password='senha',
                               host='localhost',
                               database='Controle_de_Acesso')
@@ -65,12 +66,10 @@ def searchCpf(Cpf):
     cursor.close()
     return cpfAuth
 def searchGender(Cpf):
-    
     cursor = cnx.cursor()
     cpf_atual = int(Cpf)
     cursor.execute(select_gender, {'cpf_atual': cpf_atual})
     for row in cursor:
-        # FIXME: Search about use ifs in one line
         if str(row[0]) == "Masculino":
             resposta = "Masc"
         else:
@@ -109,7 +108,8 @@ def listStudents():
 def on_message(client, userdata, message):
     print ("Message received: " + str(message.payload.decode("utf-8")))
     print ("Topic: " + str (message.topic) )
-    
+
+    # **************** Celular Topics **************************** #
     # Receiving data from cellphones
     if message.topic == "celular/dados":
         data = str(message.payload.decode("utf-8")).split("$")
@@ -135,57 +135,46 @@ def on_message(client, userdata, message):
             print("Open!")
         else:
             pass
+    # **************** Software Topics **************************** #
     # Adding Student
     if message.topic == "software/Add/validacao/Sw2Serv":
-        print("Dados")
         data = str(message.payload.decode("utf-8")).split("%")
-        print (data[1])
-        #dado[0]: Nome #dado[1]: CPF #dado[2]: Sexo #dado[3]: Senha
+        '''Info
+            #data[0]: Name #data[1]: CPF #data[2]: gender #data[3]: Password
+                                                                         '''
         if not searchCpf(data[1]):
-            print ("Cpf Nao existe no BD :)")
-            data_Alunos = (data[0],data[1],data[2],data[3])
+            data_Student = (data[0],data[1],data[2],data[3])
             cursor = cnx.cursor()
-            cursor.execute(add_Alunos, data_Alunos)
+            cursor.execute(add_Alunos, data_Student)
             cnx.commit()
             cursor.close()
             client.publish("software/Add/validacao/Serv2Sw","Valido")
             time.sleep(0.5)
-            # cnx.close()
-            print ("Finalizado!")
         else:
-            print ("CPF existe no Banco")
+            print ("CPF already exist on data base")
             client.publish("software/Add/validacao/Serv2Sw", "Nao Valido")
     # Changing Password
     if message.topic == "software/Trocar/validacao/Sw2Serv":
-        print("Dados")
         data = str(message.payload.decode("utf-8")).split("%")
-        print (data[0],data[1])
-        #dado[0]: CPF #dado[1]: Nova Senha
+        ''' Info
+            dado[0]: CPF  dado[1]: New Password
+                                            '''
         if searchCpf(data[0]):
-            print ("CPF encontrado)")
-            data_Alunos = (data[1],data[0])
+            data_Student = (data[1],data[0])
             cursor = cnx.cursor()
-            cursor.execute(update_senha, data_Alunos)
-
+            cursor.execute(update_senha, data_Student)
             cnx.commit()
             cursor.close()
             client.publish("software/Trocar/validacao/Serv2Sw","Valido")
             time.sleep(0.5)
-            # cnx.close()
-            print ("Finalizado!")
         else:
-            print ("CPF existe no Banco")
+            print ("CPF already exist on data base")
             client.publish("software/Trocar/validacao/Serv2Sw", "Nao Valido")
     # Listing an Especific Student
     if message.topic == "software/Procura/validacao/Sw2Serv":
-        print("1")
         data = str(message.payload.decode("utf-8"))
-        print("2")
         if searchCpf(data):
-            print("3")
-            print (type(searchStudent(data)))
             client.publish("software/Procura/validacao/Serv2Sw", "Valido$"+ searchStudent(data))
-            print ("Enviou!")
         else:
             client.publish("software/Procura/validacao/Serv2Sw", "Nao Valido$" + searchStudent(data))
     # Deleting Student
@@ -194,7 +183,6 @@ def on_message(client, userdata, message):
         if searchCpf(data):
             deleteStudent(data)
             client.publish("software/Apagar/validacao/Serv2Sw", "Valido")
-            # print ("Enviou!")
         else:
             client.publish("software/Apagar/validacao/Serv2Sw", "Nao Valido")
     # List All Students
@@ -204,27 +192,24 @@ def on_message(client, userdata, message):
             client.publish("software/ListarTodos/validacao/Serv2Sw", listStudents())
             print ("Enviou!",listStudents())
 
-
 # Creating a new MQTT client
-client = mqtt.Client("Servidor_Raspberry")
+client = mqtt.Client("Raspberry-Server")
 
 client.on_message = on_message
 
-# client.connect("192.168.0.25", 5050)
+# Connection
 client.connect("192.168.1.3", 5050)
 
+# Subscribes
+client.subscribe("celular/dados")
 client.subscribe("celular/porta/Masc")
 client.subscribe("celular/porta/Fem")
-client.subscribe("celular/cpf")
-client.subscribe("celular/senha")
-client.subscribe("celular/dados")
 client.subscribe("software/Add/validacao/Sw2Serv")
 client.subscribe("software/Add/validacao/Serv2Sw")
 client.subscribe("software/Trocar/validacao/Sw2Serv")
 client.subscribe("software/Procura/validacao/Sw2Serv")
 client.subscribe("software/ListarTodos/validacao/Sw2Serv")
 client.subscribe("software/Apagar/validacao/Sw2Serv")
-
 
 client.loop_forever()
 
