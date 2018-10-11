@@ -67,7 +67,7 @@ def on_message(client, userdata, message):
 
 # Functions *************************************************************************************************************************
 # Add Students
-def SalvarDados():
+def addStudent():
     name = e1.get()
     cpf = "".join([str(s) for s in list(e2.get()) if s.isdigit()])
     password = e3.get()
@@ -105,7 +105,7 @@ def SalvarDados():
         e4.delete(0, END)
         e1.focus_set()
         messagebox.showwarning("Erro", "Dados Incompletos")
-def AddAluno():
+def addStudentDisplay():
     TelaAddAlunos = Tk()
     TelaAddAlunos.title('Adicionar Alunos')
     TelaAddAlunos.geometry('400x200')
@@ -132,10 +132,10 @@ def AddAluno():
     e3.grid(row=2, column=1)
     e4.grid(row=3, column=1)
     e1.focus_set()
-    Button(TelaAddAlunos, text='Adicionar', command=SalvarDados).grid(row=7, column=1, sticky=W, pady=4)
+    Button(TelaAddAlunos, text='Adicionar', command=addStudent).grid(row=7, column=1, sticky=W, pady=4)
     mainloop()
 # Change Password
-def AlterarSenha():
+def changePassword():
     cpf = "".join([str(s) for s in list(e4.get()) if s.isdigit()])
     password1 = e5.get()
     password2 = e6.get()
@@ -163,7 +163,7 @@ def AlterarSenha():
         e6.delete(0, END)
         e4.focus_set()
         messagebox.showwarning("Erro", "Dados Incompletos")
-def MudancaSenha():
+def changePasswordDisplay():
     TelaMudancaSenha = Tk()
     TelaMudancaSenha.title("Adicionar Alunos")
     TelaMudancaSenha.geometry('400x200')
@@ -183,10 +183,10 @@ def MudancaSenha():
     e5.grid(row=1, column=1)
     e6.grid(row=2, column=1)
     e4.focus_set()
-    Button(TelaMudancaSenha, text='Mudar Senha', command=AlterarSenha).grid(row=3, column=1, sticky=W, pady=4)
+    Button(TelaMudancaSenha, text='Mudar Senha', command=changePassword).grid(row=3, column=1, sticky=W, pady=4)
     mainloop()
 # Search Student
-def Procurar():
+def searchStudent():
     cpf = "".join([str(s) for s in list(e7.get()) if s.isdigit()])
     if cpfcnpj.validate(cpf):
         client.publish("software/Procura/validacao/Sw2Serv", cpf)
@@ -194,7 +194,7 @@ def Procurar():
     else:
         messagebox.showwarning("Erro", "Cpf Inválido!")
         e7.delete(0, END)
-def ProcuraAluno():
+def searchStudentDisplay():
     TelaProcuraAluno = Tk()
     TelaProcuraAluno.title("Procura de Alunos")
     TelaProcuraAluno.geometry('500x250')
@@ -204,10 +204,10 @@ def ProcuraAluno():
     e7 = Entry(TelaProcuraAluno)
     e7.grid(row=0, column=1)
     e7.focus_set()
-    Button(TelaProcuraAluno, text="Procurar", command=Procurar).grid(row=3, column=1, sticky=W, pady=2)
+    Button(TelaProcuraAluno, text="Procurar", command=searchStudent).grid(row=3, column=1, sticky=W, pady=2)
     mainloop()
 # Delete Student
-def Apagar():
+def deleteStudent():
     cpf = "".join([str(s) for s in list(e8.get()) if s.isdigit()])
     if cpfcnpj.validate(cpf):
         if messagebox.askyesno("Alerta", "Deseja realmente apagar o aluno com CPF: "+ str(cpf)+ " ?"):
@@ -217,10 +217,9 @@ def Apagar():
         else:
             pass
     else:
-        print("Dados Inválidos")
         messagebox.showwarning("Erro", "Dados Inválidos")
         e8.delete(0, END)
-def ApagarAluno():
+def deleteStudentDisplay():
     TelaApagarAluno = Tk()
     TelaApagarAluno.title("Apagar Alunos")
     TelaApagarAluno.geometry('500x250')
@@ -230,11 +229,10 @@ def ApagarAluno():
     e8 = Entry(TelaApagarAluno)
     e8.grid(row=0, column=1)
     e8.focus_set()
-    Button(TelaApagarAluno, text="Apagar", command=Apagar).grid(row=3, column=1, sticky=W, pady=2)
+    Button(TelaApagarAluno, text="Apagar", command=deleteStudent).grid(row=3, column=1, sticky=W, pady=2)
     mainloop()
 # Listar Todos os Alunos
-def ListarAlunos():
-    print("Listando Alunos")
+def listStudents():
     client.publish("software/ListarTodos/validacao/Sw2Serv", "Listar")
     client.loop_start()
 
@@ -246,22 +244,22 @@ telaPrincipalLabel = Label(TelaPrincipal, height=2, text="Selecione o que deseja
 
 telaPrincipalLabel.grid(row=0, column=0, sticky=E)
 
-addAlunosButton = Button(TelaPrincipal, height=1, font="Arial 20 normal", text="Adicionar Alunos        ",
-                         command=AddAluno)
-mudarSenhaButton = Button(TelaPrincipal, height=1, font="Arial 20 normal", text="Mudar Senha             ",
-                          command=MudancaSenha)
-procurarAlunoButton = Button(TelaPrincipal, height=1, font="Arial 20 normal", text="Procurar Aluno           ",
-                             command=ProcuraAluno)
-apagarAlunoButton = Button(TelaPrincipal, height=1, font="Arial 20 normal", text="Apagar Aluno             ",
-                           command=ApagarAluno)
-listarTodosAlunosButton = Button(TelaPrincipal, height=1, font="Arial 20 normal", text="Listar todos os Alunos",
-                                 command=ListarAlunos)
+addStudentButton = Button(TelaPrincipal, height=1, font="Arial 20 normal", text="Adicionar Alunos        ",
+                          command=addStudentDisplay)
+changePasswordButton = Button(TelaPrincipal, height=1, font="Arial 20 normal", text="Mudar Senha             ",
+                              command=changePasswordDisplay)
+searchStudentButton = Button(TelaPrincipal, height=1, font="Arial 20 normal", text="Procurar Aluno           ",
+                             command=searchStudentDisplay)
+deleteStudentButton = Button(TelaPrincipal, height=1, font="Arial 20 normal", text="Apagar Aluno             ",
+                             command=deleteStudentDisplay)
+listAllStudentsButton = Button(TelaPrincipal, height=1, font="Arial 20 normal", text="Listar todos os Alunos",
+                               command=listStudents)
 
-addAlunosButton.grid(row=1, column=0, sticky=W)
-mudarSenhaButton.grid(row=2, column=0, sticky=W)
-procurarAlunoButton.grid(row=3, column=0, sticky=W)
-apagarAlunoButton.grid(row=4, column=0, sticky=W)
-listarTodosAlunosButton.grid(row=5, column=0, sticky=W)
+addStudentButton.grid(row=1, column=0, sticky=W)
+changePasswordButton.grid(row=2, column=0, sticky=W)
+searchStudentButton.grid(row=3, column=0, sticky=W)
+deleteStudentButton.grid(row=4, column=0, sticky=W)
+listAllStudentsButton.grid(row=5, column=0, sticky=W)
 
 # MQTT Connection *****************************************************************************************************************
 client = mqtt.Client("Software DA")
