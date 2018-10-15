@@ -11,7 +11,7 @@ import CocoaMQTT
 
 class AcionamentoViewController: UIViewController {
     
-    let mqttClient = CocoaMQTT(clientID: "iOS Device", host:"192.168.1.3", port: 5050)
+    let mqttClient = CocoaMQTT(clientID: "iOS Device", host:"192.168.1.2", port: 5050)
     
     // Quit Login
     @IBAction func SairLogin(_ sender: Any) {
