@@ -17,7 +17,7 @@ class EntrarViewController: UIViewController {
     // Global Variables
     var userData: String = ""
     var wait: UIActivityIndicatorView = UIActivityIndicatorView()
-    let mqttClient = CocoaMQTT(clientID: "iOS Device", host:"192.168.1.2", port: 5050) // Configurações do MQTT
+    let mqttClient = CocoaMQTT(clientID: "iOS Device", host:"192.168.1.3", port: 5050) // Configurações do MQTT
     
     
     override func viewDidLoad() {

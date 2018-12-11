@@ -19,7 +19,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordField;
 
 
-    final static String serverUri = "tcp://192.168.1.2:5050";
+    final static String serverUri = "tcp://192.168.1.3:5050";
     final static String clientId = "Android Device";
     final String dataTopic = "celular/dados";
     final String responseDataTopic = "celular/dados/resposta";

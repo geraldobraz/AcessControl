@@ -150,7 +150,7 @@ def changePassword():
             e5.delete(0, END)
             e6.delete(0, END)
             e4.focus_set()
-            messagebox.showinfo("Informação", "Senha Alterada com sucesso!")
+           # messagebox.showinfo("Informação", "Senha Alterada com sucesso!")
         else:
             e4.delete(0, END)
             e5.delete(0, END)
@@ -165,7 +165,7 @@ def changePassword():
         messagebox.showwarning("Erro", "Dados Incompletos")
 def changePasswordDisplay():
     TelaMudancaSenha = Tk()
-    TelaMudancaSenha.title("Adicionar Alunos")
+    TelaMudancaSenha.title("Mudar Senha")
     TelaMudancaSenha.geometry('400x200')
     Label(TelaMudancaSenha, text="CPF:").grid(row=0, sticky=E)
     Label(TelaMudancaSenha, text="Nova Senha:").grid(row=1, sticky=E)
@@ -264,7 +264,7 @@ listAllStudentsButton.grid(row=5, column=0, sticky=W)
 # MQTT Connection *****************************************************************************************************************
 client = mqtt.Client("Software DA")
 client.on_message = on_message
-#client.connect("192.168.1.2", 5050)
+client.connect("192.168.1.3", 5050)
 
 
 # MQTT Subscribe *******************************************************************************************************************
