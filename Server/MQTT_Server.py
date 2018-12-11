@@ -6,6 +6,17 @@ import paho.mqtt.client as mqtt
 from pycpfcnpj import cpfcnpj
 import mysql.connector
 import time
+import RPi.GPIO as GPIO
+
+
+# GPIO Setup
+LedPin23 = 23
+LedPin24 = 24
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(LedPin23 , GPIO.OUT)
+GPIO.setup(LedPin24 , GPIO.OUT)
+GPIO.output(LedPin23 , False)
+GPIO.output(LedPin24 , False)
 
 # Data Base Configuration
 cnx = mysql.connector.connect(user='root', password='senha',
@@ -122,7 +133,9 @@ def on_message(client, userdata, message):
         print(">>Topic: celular/porta/Masc")
         resp = str(message.payload.decode("utf-8"))
         if message.payload.decode("utf-8") == "ON":
-            # TODO: Configurate the Raspberry I/Os
+            GPIO.output(LedPin23 , True ) # led on
+            time.sleep(0.01)
+            GPIO.output(LedPin23 , False) # led off
             print("Open!")
         else:
             pass
@@ -131,7 +144,9 @@ def on_message(client, userdata, message):
         print(">>Topic: celular/porta/Fem")
         resp = str(message.payload.decode("utf-8"))
         if message.payload.decode("utf-8") == "ON":
-            # Mandar um comando RGPIO para abrir a porta
+            GPIO.output(LedPin24 , True ) # led on
+            time.sleep(0.01)
+            GPIO.output(LedPin24 , False) # led off
             print("Open!")
         else:
             pass
